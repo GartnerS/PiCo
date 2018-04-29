@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic.utils;
+package com.nex.blub.PiCo.utils;
 
 import android.util.Log;
 import org.json.JSONArray;

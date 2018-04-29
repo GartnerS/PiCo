@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic.interfaces;
+package com.nex.blub.PiCo.interfaces;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import android.content.Context;
 
 public interface PimaticActivity {
 
-    public Context getContext();
+    Context getContext();
 
-    public boolean isInForeground();
+    boolean isInForeground();
 }

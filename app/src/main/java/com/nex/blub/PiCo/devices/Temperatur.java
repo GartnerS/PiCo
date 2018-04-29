@@ -1,9 +1,9 @@
-package com.nex.blub.pimatic.devices;
+package com.nex.blub.PiCo.devices;
 
 import android.util.Log;
-import com.nex.blub.pimatic.API;
-import com.nex.blub.pimatic.interfaces.Device;
-import com.nex.blub.pimatic.utils.JSONUtils;
+import com.nex.blub.PiCo.API;
+import com.nex.blub.PiCo.interfaces.Device;
+import com.nex.blub.PiCo.utils.JSONUtils;
 import org.json.JSONObject;
 
 

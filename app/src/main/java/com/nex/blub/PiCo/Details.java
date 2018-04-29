@@ -1,9 +1,9 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.nex.blub.pimatic.devices.Temperatur;
+import com.nex.blub.PiCo.devices.Temperatur;
 
 public class Details extends Activity {
 

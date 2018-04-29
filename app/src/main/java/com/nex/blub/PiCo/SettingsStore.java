@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.app.Activity;
 import android.content.Context;

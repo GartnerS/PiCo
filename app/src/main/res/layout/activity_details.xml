@@ -42,6 +42,6 @@
 
         </TableRow>
 
-        <com.nex.blub.pimatic.customViews.DetailTableRow></com.nex.blub.pimatic.customViews.DetailTableRow>
+        <com.nex.blub.PiCo.customViews.DetailTableRow></com.nex.blub.PiCo.customViews.DetailTableRow>
     </TableLayout>
 </ScrollView>

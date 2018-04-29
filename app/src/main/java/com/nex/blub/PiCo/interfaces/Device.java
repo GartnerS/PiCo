@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic.interfaces;
+package com.nex.blub.PiCo.interfaces;
 
 /**
  * Interface, dass alle in Pimatic eingerichteten Geräte implementieren sollten

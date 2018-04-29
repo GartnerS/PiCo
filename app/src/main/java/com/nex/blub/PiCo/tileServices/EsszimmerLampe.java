@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic.tileServices;
+package com.nex.blub.PiCo.tileServices;
 
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -6,14 +6,14 @@ import android.os.CountDownTimer;
 import android.service.quicksettings.TileService;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
-import com.nex.blub.pimatic.R;
-import com.nex.blub.pimatic.devices.Light;
+import com.nex.blub.PiCo.R;
+import com.nex.blub.PiCo.devices.Light;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class WohnzimmerLampe extends TileService {
+public class EsszimmerLampe extends TileService {
 
-    private static final String TAG = "TileService_Wohnzimmer";
+    private static final String TAG = "TileService_Esszimmer";
 
     private static final int timerInterval = 30000;
 
@@ -29,7 +29,7 @@ public class WohnzimmerLampe extends TileService {
      */
     @Override
     public void onStartListening() {
-        this.light = new Light("WohnzimmerLicht");
+        this.light = new Light("EsszimmerLicht");
 
         new CountDownTimer(timerInterval, 1000) {
             public void onTick(long millisUntilFinished) {}
@@ -43,7 +43,6 @@ public class WohnzimmerLampe extends TileService {
 
         this.update();
     }
-
 
     private void update() {
         // Aktuellen Status des Lichts abfragen

@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic.customViews;
+package com.nex.blub.PiCo.customViews;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,7 +9,7 @@ import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.nex.blub.pimatic.R;
+import com.nex.blub.PiCo.R;
 import org.json.JSONObject;
 
 

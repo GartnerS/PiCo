@@ -1,7 +1,7 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.widget.Toast;
-import com.nex.blub.pimatic.interfaces.PimaticActivity;
+import com.nex.blub.PiCo.interfaces.PimaticActivity;
 
 
 class Notifier {

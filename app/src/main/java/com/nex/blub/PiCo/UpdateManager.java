@@ -1,8 +1,8 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.view.View;
 
-import com.nex.blub.pimatic.interfaces.Device;
+import com.nex.blub.PiCo.interfaces.Device;
 
 import java.util.HashMap;
 import java.util.List;

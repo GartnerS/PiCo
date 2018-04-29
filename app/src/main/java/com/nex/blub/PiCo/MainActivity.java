@@ -1,4 +1,4 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
-import com.nex.blub.pimatic.interfaces.Device;
-import com.nex.blub.pimatic.devices.Light;
-import com.nex.blub.pimatic.devices.Temperatur;
-import com.nex.blub.pimatic.interfaces.PimaticActivity;
+import com.nex.blub.PiCo.interfaces.Device;
+import com.nex.blub.PiCo.devices.Light;
+import com.nex.blub.PiCo.devices.Temperatur;
+import com.nex.blub.PiCo.interfaces.PimaticActivity;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;

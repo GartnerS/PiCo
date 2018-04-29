@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pimatic</string>
+    <string name="app_name">PiCo</string>
     <string name="switch_on">An</string>
     <string name="switch_off">Aus</string>
     <string name="btn_save">Speichern</string>

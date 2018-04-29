@@ -1,8 +1,8 @@
-package com.nex.blub.pimatic;
+package com.nex.blub.PiCo;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import com.nex.blub.pimatic.interfaces.Device;
+import com.nex.blub.PiCo.interfaces.Device;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
