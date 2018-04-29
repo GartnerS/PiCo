@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/playstore_gray"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/playstore_gray">
+
+        <!-- Aktualisierungs-Intervall einstellen -->
+
+        <!-- Notification zum Lüften -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tablerow_border"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/UpdateIntervall_Label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/settings_intervall"
+                android:textColor="@android:color/black"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/input_intervall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="@android:color/transparent"
+                android:ems="7"
+                android:gravity="center"
+                android:inputType="numberSigned"
+                android:textColor="@android:color/black" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tablerow_border"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/WohnzimmerLampe_Label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/settings_notification"
+                android:textColor="@android:color/black"
+                android:textSize="19sp" />
+
+            <Switch
+                android:id="@+id/btn_lueften"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:checked="false"
+                android:onClick="toggleLight"
+                android:textOff="@string/switch_off"
+                android:textOn="@string/switch_on"
+                android:textSize="30sp"
+                android:translationX="-60sp" />
+        </TableRow>
+
+
+        <!-- Button zum Speichern -->
+    </TableLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:text="@string/btn_save" />
+
+</LinearLayout>
