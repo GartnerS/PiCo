@@ -14,6 +14,7 @@ public class Settings extends Activity {
         setContentView(R.layout.settings);
     }
 
+    @SuppressWarnings("unused")
     public void save(View v) {
         SettingsStore store = new SettingsStore(this);
 

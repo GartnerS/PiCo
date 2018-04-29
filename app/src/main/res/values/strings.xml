@@ -4,6 +4,8 @@
     <string name="switch_off">Aus</string>
     <string name="btn_save">Speichern</string>
     <string name="no_value">-</string>
+    <string name="menu_item_update">Aktualisieren</string>
+    <string name="menu_item_settings">Einstellungen</string>
     <string name="device_wohnzimmerlampe">Wohnzimmerlampe</string>
     <string name="device_esszimmerlampe">Esszimmerlampe</string>
     <string name="device_wohnzimmertemp">Wohnzimmer</string>
@@ -16,6 +18,7 @@
     <string name="temperature">Temperatur</string>
     <string name="humidity">Luftfeuchtigkeit</string>
     <string name="settings_intervall">Aktualisierung (min)</string>
+    <string name="settings_intervall_hint">Festlegen der Aktualisierung in Minuten</string>
     <string name="settings_notification">Info zum Lüften</string>
     <string name="temp">%s °C</string>
     <string name="hum">%s %%</string>

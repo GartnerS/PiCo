@@ -3,11 +3,10 @@ package com.nex.blub.PiCo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.animation.AccelerateInterpolator;
 
 public class SettingsStore {
 
-    private SharedPreferences sharedPref;
+    private final SharedPreferences sharedPref;
 
     private SharedPreferences.Editor editor;
 

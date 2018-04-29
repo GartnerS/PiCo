@@ -19,7 +19,7 @@ public class JSONUtils {
         }
 
         if (jsonArray == null) {
-            return object;
+            return null;
         }
 
         for (int i = 0; i < jsonArray.length(); i++) {

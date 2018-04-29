@@ -1,9 +1,9 @@
 package com.nex.blub.PiCo.customViews;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TableLayout;
@@ -31,29 +31,25 @@ public class DetailTableRow extends TableRow {
     private TextView maxHum;
     private TextView avgHum;
 
-    // Tabelle, die die Werte gruppiert
-    private TableLayout innerTable;
-
-    private TableRow row1;
-    private TableRow row2;
-    private TableRow row3;
-
-
     // Schriftgröße der Werte
     private int textSizeofValues = 16;
-
-    // Farbe der Werte
-    private int colorOfValues = Color.BLACK;
 
 
     /**
      * Konstruktor, wird so benötigt
      *
-     * @param context
-     * @param attrs
+     * @param context der aktulle Context
+     * @param attrs Set von aktuellen Werten, die angezeigt werden sollen
      */
     public DetailTableRow(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        // Tabelle, die die Werte gruppiert
+        TableLayout innerTable;
+
+        TableRow row1;
+        TableRow row2;
+        TableRow row3;
 
         this.setPadding(15, 15, 15, 15);
         this.setBackground(ContextCompat.getDrawable(context, R.drawable.tablerow_border));
@@ -80,31 +76,31 @@ public class DetailTableRow extends TableRow {
                 this.avgHum
         });
 
-        this.row1 = new TableRow(context);
-        this.row1.setLayoutDirection(LAYOUT_DIRECTION_RTL);
-        this.row2 = new TableRow(context);
-        this.row2.setLayoutDirection(LAYOUT_DIRECTION_RTL);
-        this.row3 = new TableRow(context);
-        this.row3.setLayoutDirection(LAYOUT_DIRECTION_RTL);
+        row1 = new TableRow(context);
+        row1.setLayoutDirection(LAYOUT_DIRECTION_RTL);
+        row2 = new TableRow(context);
+        row2.setLayoutDirection(LAYOUT_DIRECTION_RTL);
+        row3 = new TableRow(context);
+        row3.setLayoutDirection(LAYOUT_DIRECTION_RTL);
 
-        this.row1.addView(this.maxHum);
-        this.row1.addView(this.maxTemp);
+        row1.addView(this.maxHum);
+        row1.addView(this.maxTemp);
 
-        this.row2.addView(this.avgHum);
-        this.row2.addView(this.avgTemp);
+        row2.addView(this.avgHum);
+        row2.addView(this.avgTemp);
 
-        this.row3.addView(this.minHum);
-        this.row3.addView(this.minTemp);
+        row3.addView(this.minHum);
+        row3.addView(this.minTemp);
 
-        this.innerTable = new TableLayout(context);
+        innerTable = new TableLayout(context);
 
-        this.innerTable.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0.5f));
-        this.innerTable.addView(this.row1);
-        this.innerTable.addView(this.row2);
-        this.innerTable.addView(this.row3);
+        innerTable.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0.5f));
+        innerTable.addView(row1);
+        innerTable.addView(row2);
+        innerTable.addView(row3);
 
         this.addView(date);
-        this.addView(this.innerTable);
+        this.addView(innerTable);
     }
 
 
@@ -122,12 +118,13 @@ public class DetailTableRow extends TableRow {
         for (TextView view : humViews) {
             view.setText("-");
             view.setTextSize(TypedValue.COMPLEX_UNIT_SP, this.textSizeofValues);
-            view.setGravity(Gravity.RIGHT);
+            view.setGravity(Gravity.END);
             view.setLayoutParams(new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 0.075f));
         }
     }
 
 
+    @SuppressWarnings("unused")
     public void setValues(String date, JSONObject temperatur, JSONObject humidity) {
         try {
             this.date.setText(date);
@@ -141,6 +138,8 @@ public class DetailTableRow extends TableRow {
             this.maxHum.setText(String.valueOf(humidity.getDouble("max")));
             this.minHum.setText(String.valueOf(humidity.getDouble("min")));
             this.avgHum.setText(String.valueOf(humidity.getDouble("avg")));
-        } catch(Exception e) {}
+        } catch(Exception e) {
+            Log.e("DetailTableRow", e.getMessage());
+        }
     }
 }

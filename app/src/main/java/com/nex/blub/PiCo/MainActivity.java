@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
     private boolean isActivityInForeground = false;
 
-    private Map<Device, List<View>> Devices = new HashMap<>();
+    private final Map<Device, List<View>> Devices = new HashMap<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -114,12 +114,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-    @Override
     protected void onResume() {
         super.onResume();
         this.isActivityInForeground = true;
@@ -173,7 +167,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     /**
      * Ruft bei allen Devices die update()-Methode auf
      */
-    public void updateAllDevices() {
+    private void updateAllDevices() {
         for (Device d : this.Devices.keySet()) {
             d.update();
         }
@@ -239,7 +233,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
-    public void showSettings() {
+    private void showSettings() {
         Intent settingsAcitivity = new Intent(this, Settings.class);
         startActivity(settingsAcitivity);
     }
