@@ -31,4 +31,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-appindexing:15.0.0'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
     api 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+}
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 }
