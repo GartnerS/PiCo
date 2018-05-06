@@ -29,8 +29,6 @@ public class Details extends Activity implements ShowHistoryData {
 
     private HistoryChart chart;
 
-    private EditText daysRangeSelect;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,8 @@ public class Details extends Activity implements ShowHistoryData {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        this.daysRangeSelect = findViewById(R.id.daysRange);
-        int days = Integer.valueOf(this.daysRangeSelect.getText().toString());
+        EditText daysRangeSelect = findViewById(R.id.daysRange);
+        int days = Integer.valueOf(daysRangeSelect.getText().toString());
 
         this.chart = new HistoryChart((LineChart) findViewById(R.id.chart));
         this.chart.setStatisticViews((TextView) findViewById(R.id.minimum), (TextView) findViewById(R.id.maximum), (TextView) findViewById(R.id.average));
@@ -59,7 +57,7 @@ public class Details extends Activity implements ShowHistoryData {
         this.device.registerViewToShowData(this);
         this.requestData(days);
 
-        this.daysRangeSelect.addTextChangedListener(new TextWatcher() {
+        daysRangeSelect.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 String value = s.toString();
                 Log.i(TAG, value);
