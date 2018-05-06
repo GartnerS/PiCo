@@ -34,6 +34,7 @@ public class Temperatur implements Device, HasHistoryData {
     // Liste mit historischen Werten
     private List<HistoryData> historyData;
 
+    // Referenz zu der View, die dafür zuständig ist, die historischen Daten anzuzeigen
     private ShowHistoryData historyView;
 
 
@@ -112,23 +113,50 @@ public class Temperatur implements Device, HasHistoryData {
     }
 
 
+    /**
+     * Abfrage der historischen Daten des Geräts
+     *
+     * @param days Anzahl der Tage, für die die historischen Daten abgefragt werden sollen
+     */
     public void getHistory(int days) {
         new API(this, true).execute("?device=" + this.name + "&days=" + days);
     }
 
 
+    /**
+     * Callback-Methode, die aufgerufen wird, wenn die historischen Daten
+     * abgefragt wurde.
+     *
+     * @param result String im JSON-Format, die die Antwort des API-Anfrage darstellt.
+     */
     public void receiveHistoryResult(String result) {
         this.historyData = JSONUtils.convertStringToHistoryData(result);
+
+        if (this.historyView == null) {
+            Log.e(TAG, "Keine View zum Anzeigen der historischen Daten registriert");
+            return;
+        }
 
         this.historyView.show();
     }
 
 
+    /**
+     *  Getter für die Liste der historischen Daten
+     *
+     * @return Liste mit den historischen Daten
+     */
     public List<HistoryData> getHistoryData() {
         return this.historyData;
     }
 
 
+    /**
+     * Eine View registrieren, die für die Anzeige der historischen Daten
+     * zuständig ist.
+     *
+     * @param callbackView View, zum Anzeigen der Daten
+     */
     public void registerViewToShowData(ShowHistoryData callbackView) {
         this.historyView = callbackView;
     }
