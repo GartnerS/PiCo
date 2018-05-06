@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
-import com.nex.blub.PiCo.interfaces.Device;
+
 import com.nex.blub.PiCo.devices.Light;
 import com.nex.blub.PiCo.devices.Temperatur;
+import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.interfaces.PimaticActivity;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -246,6 +248,29 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
             case R.id.Wohnzimmer:
                 detailActivity.putExtra("Device_Name", "Wohnzimmer");
                 detailActivity.putExtra("Device_ID", "WohnzimmerTemp");
+                break;
+            case R.id.Kueche:
+                detailActivity.putExtra("Device_Name", "Kueche");
+                detailActivity.putExtra("Device_ID", "Kueche");
+                break;
+            case R.id.Schlafzimmer:
+                detailActivity.putExtra("Device_Name", "Schlafzimmer");
+                detailActivity.putExtra("Device_ID", "Schlafzimmer");
+                break;
+            case R.id.Bad:
+                detailActivity.putExtra("Device_Name", "Bad");
+                detailActivity.putExtra("Device_ID", "Bad");
+                break;
+            case R.id.Arbeitszimmer:
+                detailActivity.putExtra("Device_Name", "Arbeitszimmer");
+                detailActivity.putExtra("Device_ID", "Arbeitszimmer");
+                break;
+            case R.id.Draussen:
+                detailActivity.putExtra("Device_Name", "Draussen");
+                detailActivity.putExtra("Device_ID", "Draussen");
+                break;
+            default:
+                return;
         }
 
         startActivity(detailActivity);

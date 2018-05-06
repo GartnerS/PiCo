@@ -13,5 +13,4 @@ public interface Device {
 
     // Diese Methode wird nach einem API-Request aufgerufen.
     void receiveResult(String result);
-
 }

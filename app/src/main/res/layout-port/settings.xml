@@ -74,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:checked="false"
-                android:onClick="toggleLight"
                 android:textOff="@string/switch_off"
                 android:textOn="@string/switch_on"
                 android:textSize="30sp"

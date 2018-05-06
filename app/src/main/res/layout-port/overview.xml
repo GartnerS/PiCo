@@ -6,449 +6,453 @@
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TableLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/playstore_gray">
+            android:layout_height="match_parent">
 
-            <!-- WOHNZIMMER-LAMPE -->
-
-
-            <TableRow
-                android:id="@+id/Lampen"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/tablerow_border"
-                android:padding="15dp">
+                android:layout_height="wrap_content"
+                android:background="@color/playstore_gray">
 
-                <TableLayout
+                <!-- WOHNZIMMER-LAMPE -->
+
+
+                <TableRow
+                    android:id="@+id/Lampen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:padding="15dp">
 
-                    <TableRow
+                    <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/WohnzimmerLampe_Label"
+                        <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:text="@string/device_wohnzimmerlampe"
-                            android:textColor="@android:color/black"
-                            android:textSize="19sp" />
+                            android:layout_weight="1">
 
-                        <Switch
-                            android:id="@+id/button_licht"
+                            <TextView
+                                android:id="@+id/WohnzimmerLampe_Label"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:background="@android:color/transparent"
+                                android:gravity="center"
+                                android:text="@string/device_wohnzimmerlampe"
+                                android:textColor="@android:color/black"
+                                android:textSize="19sp" />
+
+                            <Switch
+                                android:id="@+id/button_licht"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:checked="false"
+                                android:gravity="center_horizontal"
+                                android:onClick="toggleLight"
+                                android:textOff="@string/switch_off"
+                                android:textOn="@string/switch_on"
+                                android:textSize="30sp"
+                                android:translationX="-50dp" />
+
+                        </TableRow>
+
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:checked="false"
-                            android:gravity="center_horizontal"
-                            android:onClick="toggleLight"
-                            android:textOff="@string/switch_off"
-                            android:textOn="@string/switch_on"
-                            android:textSize="30sp"
-                            android:translationX="-50dp" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                    </TableRow>
+                            <TextView
+                                android:id="@+id/EssimmerLampe_Label"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:background="@android:color/transparent"
+                                android:gravity="center"
+                                android:text="@string/device_esszimmerlampe"
+                                android:textColor="@android:color/black"
+                                android:textSize="19sp" />
 
-                    <TableRow
+                            <Switch
+                                android:id="@+id/button_licht_esszimmer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:checked="false"
+                                android:onClick="toggleLight"
+                                android:textOff="@string/switch_off"
+                                android:textOn="@string/switch_on"
+                                android:textSize="30sp"
+                                android:translationX="-50dp" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </TableRow>
+
+                <!-- ESSZIMMER-LAMPE -->
+
+                <!-- WOHNZIMMER -->
+
+
+                <!-- ARBEITSZIMMER -->
+
+                <TableRow
+                    android:id="@+id/Wohnzimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/Wohnzimmer_Label"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_wohnzimmertemp"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
 
-                        <TextView
-                            android:id="@+id/EssimmerLampe_Label"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:text="@string/device_esszimmerlampe"
-                            android:textColor="@android:color/black"
-                            android:textSize="19sp" />
-
-                        <Switch
-                            android:id="@+id/button_licht_esszimmer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:checked="false"
-                            android:onClick="toggleLight"
-                            android:textOff="@string/switch_off"
-                            android:textOn="@string/switch_on"
-                            android:textSize="30sp"
-                            android:translationX="-50dp" />
-
-                    </TableRow>
-
-                </TableLayout>
-
-            </TableRow>
-
-            <!-- ESSZIMMER-LAMPE -->
-
-            <!-- WOHNZIMMER -->
-
-
-            <!-- ARBEITSZIMMER -->
-
-            <TableRow
-                android:id="@+id/Wohnzimmer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:background="@drawable/tablerow_border"
-                android:onClick="showDetails"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/Wohnzimmer_Label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_wohnzimmertemp"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
-
-                    <TableRow
+                    <TableLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
 
-                        <TextView
-                            android:id="@+id/Wohnzimmer_Temp"
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
+                            android:layout_height="match_parent">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                            <TextView
+                                android:id="@+id/Wohnzimmer_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-                        <TextView
-                            android:id="@+id/Wohnzimmer_Hum"
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
+                            android:layout_height="match_parent">
 
-                </TableLayout>
-            </TableRow>
+                            <TextView
+                                android:id="@+id/Wohnzimmer_Hum"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-            <TableRow
-                android:id="@+id/Arbeitszimmer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tablerow_border"
-                android:padding="20dp">
+                    </TableLayout>
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/Arbeitszimmer_Label"
+                <TableRow
+                    android:id="@+id/Arbeitszimmer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_arbeitszimmer"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:padding="20dp">
 
-                <TableLayout
+                    <TextView
+                        android:id="@+id/Arbeitszimmer_Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_arbeitszimmer"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/Arbeitszimmer_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+
+                <!-- DRAUSSEN -->
+
+                <!-- BAD -->
+
+
+                <!-- KUECHE -->
+
+
+                <!-- SCHLAFZIMMER -->
+
+                <TableRow
+                    android:id="@+id/Draussen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
-                    <TableRow
+                    <TextView
+                        android:id="@+id/Draussen_Label"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_draussen"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
 
-                        <TextView
-                            android:id="@+id/Arbeitszimmer_Temp"
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
+
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-                </TableLayout>
-            </TableRow>
+                            android:layout_height="match_parent">
 
-            <!-- DRAUSSEN -->
+                            <TextView
+                                android:id="@+id/Draussen_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-            <!-- BAD -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
+                            <TextView
+                                android:id="@+id/Draussen_Hum"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-            <!-- KUECHE -->
+                    </TableLayout>
+                </TableRow>
 
-
-            <!-- SCHLAFZIMMER -->
-
-            <TableRow
-                android:id="@+id/Draussen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/tablerow_border"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:id="@+id/Draussen_Label"
+                <TableRow
+                    android:id="@+id/Bad"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_draussen"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
+                    android:layout_margin="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
-                <TableLayout
+                    <TextView
+                        android:id="@+id/Bad_Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_bad"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/Bad_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/Bad_Hum"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                    </TableLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/Kueche"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:padding="10dp">
 
-                    <TableRow
+                    <TextView
+                        android:id="@+id/Kueche_Label"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_kueche"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
 
-                        <TextView
-                            android:id="@+id/Draussen_Temp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-
-                    <TableRow
+                    <TableLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
 
-                        <TextView
-                            android:id="@+id/Draussen_Hum"
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
+                            android:layout_height="match_parent">
 
-                </TableLayout>
-            </TableRow>
+                            <TextView
+                                android:id="@+id/Kueche_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-            <TableRow
-                android:id="@+id/Bad"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:background="@drawable/tablerow_border"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/Bad_Label"
+                            <TextView
+                                android:id="@+id/Kueche_Hum"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                    </TableLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/Schlafzimmer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_bad"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
+                    android:layout_margin="10dp"
+                    android:background="@drawable/tablerow_border"
+                    android:onClick="showDetails"
+                    android:padding="10dp">
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
-
-                    <TableRow
+                    <TextView
+                        android:id="@+id/Schlafzimmer_Label"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:text="@string/device_schlafzimmer"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
 
-                        <TextView
-                            android:id="@+id/Bad_Temp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-
-                    <TableRow
+                    <TableLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.5">
 
-                        <TextView
-                            android:id="@+id/Bad_Hum"
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
+                            android:layout_height="match_parent">
 
-                </TableLayout>
-            </TableRow>
+                            <TextView
+                                android:id="@+id/Schlafzimmer_Temp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-            <TableRow
-                android:id="@+id/Kueche"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tablerow_border"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/Kueche_Label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_kueche"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/Kueche_Temp"
+                        <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
+                            android:layout_height="match_parent">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                            <TextView
+                                android:id="@+id/Schlafzimmer_Hum"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="@string/no_value"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+                        </TableRow>
 
-                        <TextView
-                            android:id="@+id/Kueche_Hum"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-
-                </TableLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/Schlafzimmer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:background="@drawable/tablerow_border"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/Schlafzimmer_Label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="@string/device_schlafzimmer"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp" />
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_weight="0.5">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/Schlafzimmer_Temp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/Schlafzimmer_Hum"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/no_value"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-                    </TableRow>
-
-                </TableLayout>
-            </TableRow>
-        </TableLayout>
-    </ScrollView>
+                    </TableLayout>
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

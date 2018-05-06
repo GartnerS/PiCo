@@ -2,7 +2,10 @@ package com.nex.blub.PiCo;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
 import com.nex.blub.PiCo.interfaces.Device;
+import com.nex.blub.PiCo.interfaces.HasHistoryData;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +25,12 @@ public class API extends AsyncTask<String, Void, String>  {
     // Die IP-Adresse des Pimatic-Servers
     private static final String SERVER_IP = "192.168.0.20";
 
+    // Port für die API-Anfrage
+    private Integer Port = 80;
+
+    // Flag, ob die historischen Daten abfragen werden sollen
+    private boolean useHistoryAPI = false;
+
     // Wenn != null, dann wird nach einem Request die Methode "receiveResult(string)" des Objekts aufgerufen.
     private Device callBackObj;
 
@@ -30,6 +39,7 @@ public class API extends AsyncTask<String, Void, String>  {
      * Konstruktor
      */
     public API(){}
+
 
     /**
      * Konstruktor
@@ -42,9 +52,22 @@ public class API extends AsyncTask<String, Void, String>  {
     }
 
 
+    /**
+     * Konstruktor
+     *
+     * @param callBackObj Device-Objekt dessen Methode "receiveResult(string)"  nach einem Request
+     *                    aufgerufen werden soll
+     */
+    public API(Device callBackObj, boolean useHistoryAPI) {
+        this.callBackObj = callBackObj;
+        this.Port = (useHistoryAPI ? 8181 : 80);
+        this.useHistoryAPI = useHistoryAPI;
+    }
+
+
     protected String doInBackground(String... urls) {
         try {
-            String URL = "http://" + SERVER_IP + "/" + urls[0];
+            String URL = "http://" + SERVER_IP + ":" + this.Port + "/" + urls[0];
             return this.doRequest(URL);
         } catch (IOException e) {
             return "Unable to retrieve web page. URL may be invalid.";
@@ -109,7 +132,11 @@ public class API extends AsyncTask<String, Void, String>  {
     protected void onPostExecute(String result) {
         // Falls ein Callback-Objekt registriert wurde
         if (this.callBackObj != null) {
-            this.callBackObj.receiveResult(result);
+            if (this.useHistoryAPI) {
+                ((HasHistoryData) this.callBackObj).receiveHistoryResult(result);
+            } else {
+                this.callBackObj.receiveResult(result);
+            }
         }
     }
 }

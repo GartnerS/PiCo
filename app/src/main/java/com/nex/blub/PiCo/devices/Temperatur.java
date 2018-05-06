@@ -1,16 +1,23 @@
 package com.nex.blub.PiCo.devices;
 
 import android.util.Log;
+
 import com.nex.blub.PiCo.API;
 import com.nex.blub.PiCo.interfaces.Device;
+import com.nex.blub.PiCo.interfaces.HasHistoryData;
+import com.nex.blub.PiCo.interfaces.ShowHistoryData;
+import com.nex.blub.PiCo.utils.HistoryData;
 import com.nex.blub.PiCo.utils.JSONUtils;
+
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 /**
  *  Klasse für ein Device, das Temperatur und Luftfeuchtigkeit misst.
  */
-public class Temperatur implements Device {
+public class Temperatur implements Device, HasHistoryData {
 
     // Log-Tag für diese Klasse
     private static final String TAG = "Temperatur";
@@ -23,6 +30,11 @@ public class Temperatur implements Device {
 
     // Aktueller Luftfeuchtigkeitswert
     private double humidity;
+
+    // Liste mit historischen Werten
+    private List<HistoryData> historyData;
+
+    private ShowHistoryData historyView;
 
 
     /**
@@ -97,5 +109,27 @@ public class Temperatur implements Device {
      */
     public double getHumidity() {
         return this.humidity;
+    }
+
+
+    public void getHistory(int days) {
+        new API(this, true).execute("?device=" + this.name + "&days=" + days);
+    }
+
+
+    public void receiveHistoryResult(String result) {
+        this.historyData = JSONUtils.convertStringToHistoryData(result);
+
+        this.historyView.show();
+    }
+
+
+    public List<HistoryData> getHistoryData() {
+        return this.historyData;
+    }
+
+
+    public void registerViewToShowData(ShowHistoryData callbackView) {
+        this.historyView = callbackView;
     }
 }
