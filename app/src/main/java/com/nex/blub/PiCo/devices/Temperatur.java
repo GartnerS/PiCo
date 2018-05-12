@@ -17,6 +17,7 @@ import java.util.List;
 /**
  *  Klasse für ein Device, das Temperatur und Luftfeuchtigkeit misst.
  */
+@SuppressWarnings("ALL")
 public class Temperatur implements Device, HasHistoryData {
 
     // Log-Tag für diese Klasse

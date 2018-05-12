@@ -1,7 +1,6 @@
 package com.nex.blub.PiCo.charts;
 
 import android.graphics.Color;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -9,6 +8,7 @@ import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.nex.blub.PiCo.interfaces.ShowHistoryData;
 import com.nex.blub.PiCo.utils.HistoryData;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class HistoryChart  {
     private final static String LABEL_AVG   = "Durchschnitt";
 
     private LineChart chart;
+    private ShowHistoryData view;
 
     private List<Entry> entriesTemp = new ArrayList<>();
     private List<Entry> entriesHum  = new ArrayList<>();
@@ -34,19 +35,16 @@ public class HistoryChart  {
     private LineDataSet dataSetTemp = new LineDataSet(null, LABEL_TEMP);
     private LineDataSet dataSetHum  = new LineDataSet(null, LABEL_HUM);
 
-    // Referenzen auf die TextViews, die die statistischen Werte anzeigen
-    private TextView minimumView;
-    private TextView maximumView;
-    private TextView averageView;
-
 
     /**
      * Konstruktor
      *
      * @param chart Instanz einer Chart, die für das Anzeigen verantwortlich ist
+     * @param view Instanz einer ShowHistroyData-View, die für das Anzeigen der statistischen Werte verantwortlich ist
      */
-    public HistoryChart(LineChart chart) {
-        this.chart = chart;
+    public HistoryChart(LineChart chart, ShowHistoryData view) {
+        this.view   = view;
+        this.chart  = chart;
         this.chart.getXAxis().setValueFormatter( new AxisValueFormatter());
 
         this.dataSetTemp.setCircleColor(COLOR_TEMP);
@@ -103,16 +101,8 @@ public class HistoryChart  {
         // Chart neuzeichnen
         this.updateChart();
 
-        if (this.minimumView != null) {
-            this.minimumView.setText(LABEL_TEMP + ": " + String.valueOf(this.dataSetTemp.getYMin()));
-        }
-
-        if (this.maximumView != null) {
-            this.maximumView.setText(LABEL_HUM + ": " + String.valueOf(this.dataSetTemp.getYMax()));
-        }
-
-        if (this.averageView != null) {
-            this.averageView.setText(LABEL_AVG + ": " + String.valueOf(String.format("%.1f", avgTemp)));
+        if (this.view != null) {
+            this.view.setStatisticValuesForTemperature(this.dataSetTemp.getYMin(), this.dataSetTemp.getYMax(), avgTemp);
         }
     }
 
@@ -134,19 +124,5 @@ public class HistoryChart  {
      */
     private void updateChart() {
         this.chart.invalidate();
-    }
-
-
-    /**
-     * Setzt die TextViews, die die statistischen Werte anzeigen
-     *
-     * @param minimumView TextView für den Minimalwert
-     * @param maximumView TextView für den Maximalwert
-     * @param averageView TextView für den Durchschnittswert
-     */
-    public void setStatisticViews(TextView minimumView, TextView maximumView, TextView averageView) {
-        this.minimumView = minimumView;
-        this.maximumView = maximumView;
-        this.averageView = averageView;
     }
 }

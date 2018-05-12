@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import com.nex.blub.PiCo.charts.HistoryChart;
 import com.nex.blub.PiCo.devices.Temperatur;
 import com.nex.blub.PiCo.interfaces.HasHistoryData;
 import com.nex.blub.PiCo.interfaces.ShowHistoryData;
+
+import java.util.Locale;
 
 
 public class Details extends Activity implements ShowHistoryData {
@@ -28,6 +31,8 @@ public class Details extends Activity implements ShowHistoryData {
     private HasHistoryData device;
 
     private HistoryChart chart;
+
+    private EditText daysRangeSelect;
 
 
     @Override
@@ -47,17 +52,17 @@ public class Details extends Activity implements ShowHistoryData {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        EditText daysRangeSelect = findViewById(R.id.daysRange);
-        int days = Integer.valueOf(daysRangeSelect.getText().toString());
+        this.daysRangeSelect = findViewById(R.id.daysRange);
+        int days = Integer.valueOf(this.daysRangeSelect.getText().toString());
 
-        this.chart = new HistoryChart((LineChart) findViewById(R.id.chart));
-        this.chart.setStatisticViews((TextView) findViewById(R.id.minimum), (TextView) findViewById(R.id.maximum), (TextView) findViewById(R.id.average));
+        this.chart = new HistoryChart((LineChart) findViewById(R.id.chart), this);
+
 
         this.device = new Temperatur(this.title);
         this.device.registerViewToShowData(this);
         this.requestData(days);
 
-        daysRangeSelect.addTextChangedListener(new TextWatcher() {
+        this.daysRangeSelect.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 String value = s.toString();
                 Log.i(TAG, value);
@@ -110,5 +115,49 @@ public class Details extends Activity implements ShowHistoryData {
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(mainIntent, 0);
         return true;
+    }
+
+
+    /**
+     * Setzt die statistischen Werte für Temperatur
+     *
+     * @param minimum Minimumwert
+     * @param maximum Maximalwert
+     * @param average Durchschnittswert
+     */
+    public void setStatisticValuesForTemperature(double minimum, double maximum, double average) {
+        String minimumStr = String.format(getResources().getString(R.string.value_min), minimum);
+        String maximumStr = String.format(getResources().getString(R.string.value_max), maximum);
+        String avgStr     = String.format(getResources().getString(R.string.value_avg), average);
+
+        ((TextView) findViewById(R.id.minimum)).setText(minimumStr);
+        ((TextView) findViewById(R.id.maximum)).setText(maximumStr);
+        ((TextView) findViewById(R.id.average)).setText(avgStr);
+    }
+
+
+    public void decreaseDays(View view) {
+        this.changeSelectedDays(false);
+    }
+
+
+    public void increaseDays(View view) {
+        this.changeSelectedDays(true);
+    }
+
+
+    private void changeSelectedDays(boolean increase) {
+        if (this.daysRangeSelect == null) {
+            return;
+        }
+
+        int days = Integer.valueOf(this.daysRangeSelect.getText().toString());
+
+        if (!increase && days == 1) {
+            return;
+        }
+
+        days = (increase) ? days + 1 : days - 1;
+        this.daysRangeSelect.setText(String.format(Locale.GERMAN, "%d", days));
     }
 }

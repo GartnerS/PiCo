@@ -22,7 +22,11 @@
     <string name="settings_notification">Info zum Lüften</string>
     <string name="temp">%s °C</string>
     <string name="hum">%s %%</string>
-    <string name="value_min">Minimum: -</string>
-    <string name="value_max">Maximum: -</string>
-    <string name="value_avg">Durchschnitt: -</string>
+    <string name="value_min">Minimum: %.1f °C</string>
+    <string name="value_max">Maximum: %.1f °C</string>
+    <string name="value_avg">Durchschnitt: %.1f °C</string>
+    <string name="days">Tage:</string>
+    <string name="days_default_value">1</string>
+    <string name="lower">&lt;</string>
+    <string name="greater">&gt;</string>
 </resources>

@@ -8,34 +8,72 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/tablerow_border"
-        android:orientation="vertical">
+        android:layout_gravity="fill"
+        android:layout_margin="0dp"
+        android:background="@color/playstore_gray"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:background="@drawable/tablerow_border">
+
+            <TextView
+                android:id="@+id/labelDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/days"
+                android:textColor="@android:color/black"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/daysLower"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:onClick="decreaseDays"
+                android:text="@string/lower"
+                android:textSize="19sp" />
 
             <EditText
                 android:id="@+id/daysRange"
-                android:layout_width="84dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
-                android:ems="10"
+                android:ems="4"
+                android:enabled="false"
                 android:gravity="center"
+                android:hint="@string/days"
                 android:inputType="number"
-                android:text="1"
+                android:text="@string/days_default_value"
                 android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/daysGreater"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:onClick="increaseDays"
+                android:text="@string/greater"
+                android:textSize="19sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/tablerow_border"
+            android:minHeight="440dp">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="400dp">
+                android:layout_weight="1">
 
             </com.github.mikephil.charting.charts.LineChart>
         </TableRow>
@@ -43,6 +81,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tablerow_border"
             android:orientation="horizontal">
 
             <TextView
