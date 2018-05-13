@@ -24,16 +24,16 @@ public class HistoryChart  {
     private final static String LABEL_HUM   = "Luftfeuchtigkeit";
     private final static String LABEL_AVG   = "Durchschnitt";
 
-    private LineChart chart;
-    private ShowHistoryData view;
+    private final LineChart chart;
+    private final ShowHistoryData view;
 
-    private List<Entry> entriesTemp = new ArrayList<>();
-    private List<Entry> entriesHum  = new ArrayList<>();
+    private final List<Entry> entriesTemp = new ArrayList<>();
+    private final List<Entry> entriesHum  = new ArrayList<>();
 
-    private LineData lineData = new LineData();
+    private final LineData lineData = new LineData();
 
-    private LineDataSet dataSetTemp = new LineDataSet(null, LABEL_TEMP);
-    private LineDataSet dataSetHum  = new LineDataSet(null, LABEL_HUM);
+    private final LineDataSet dataSetTemp = new LineDataSet(null, LABEL_TEMP);
+    private final LineDataSet dataSetHum  = new LineDataSet(null, LABEL_HUM);
 
 
     /**

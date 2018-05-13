@@ -2,11 +2,11 @@ package com.nex.blub.PiCo.utils;
 
 public class HistoryData {
 
-    private Integer timestamp;
+    private final Integer timestamp;
 
-    private Double temp;
+    private final Double temp;
 
-    private  Double hum;
+    private final Double hum;
 
 
     public HistoryData(Integer timestamp, Double temperature, Double humidity) {

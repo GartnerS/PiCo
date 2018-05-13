@@ -1,9 +1,11 @@
 package com.nex.blub.PiCo.devices;
 
 import android.util.Log;
+
 import com.nex.blub.PiCo.API;
 import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.utils.JSONUtils;
+
 import org.json.JSONObject;
 
 
@@ -19,7 +21,7 @@ public class Light implements Device {
     private boolean isOn = false;
 
     // Name des Geräts. Entspricht der Device-ID bei Pimatic
-    private String name;
+    private final String name;
 
 
     /**

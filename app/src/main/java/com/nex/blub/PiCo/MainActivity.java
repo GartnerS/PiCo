@@ -29,8 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class MainActivity extends Activity implements PimaticActivity, SwipeRefreshLayout.OnRefreshListener
-{
+public class MainActivity extends Activity implements PimaticActivity, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "MainAcivity";
 
     private static final int TIMER_INTERVAL = 60000; // = 1min
@@ -48,14 +47,35 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
         setContentView(R.layout.overview);
 
         // Alle Geräte der Map hinzufügen
-        Devices.put(new Light("WohnzimmerLicht"),   new ArrayList<View>(){{ add(findViewById(R.id.button_licht)); }});
-        Devices.put(new Light("EsszimmerLicht"),    new ArrayList<View>(){{ add(findViewById(R.id.button_licht_esszimmer)); }});
-        Devices.put(new Temperatur("Wohnzimmer"),   new ArrayList<View>(){{ add(findViewById(R.id.Wohnzimmer_Temp));    add(findViewById(R.id.Wohnzimmer_Hum)); }});
-        Devices.put(new Temperatur("Arbeitszimmer"),new ArrayList<View>(){{ add(findViewById(R.id.Arbeitszimmer_Temp)); }});
-        Devices.put(new Temperatur("Draussen"),     new ArrayList<View>(){{ add(findViewById(R.id.Draussen_Temp));      add(findViewById(R.id.Draussen_Hum)); }});
-        Devices.put(new Temperatur("Kueche"),       new ArrayList<View>(){{ add(findViewById(R.id.Kueche_Temp));        add(findViewById(R.id.Kueche_Hum)); }});
-        Devices.put(new Temperatur("Bad"),          new ArrayList<View>(){{ add(findViewById(R.id.Bad_Temp));           add(findViewById(R.id.Bad_Hum)); }});
-        Devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>(){{ add(findViewById(R.id.Schlafzimmer_Temp));  add(findViewById(R.id.Schlafzimmer_Hum)); }});
+        Devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_licht));
+        }});
+        Devices.put(new Light("EsszimmerLicht"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_licht_esszimmer));
+        }});
+        Devices.put(new Temperatur("Wohnzimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Wohnzimmer_Temp));
+            add(findViewById(R.id.Wohnzimmer_Hum));
+        }});
+        Devices.put(new Temperatur("Arbeitszimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Arbeitszimmer_Temp));
+        }});
+        Devices.put(new Temperatur("Draussen"), new ArrayList<View>() {{
+            add(findViewById(R.id.Draussen_Temp));
+            add(findViewById(R.id.Draussen_Hum));
+        }});
+        Devices.put(new Temperatur("Kueche"), new ArrayList<View>() {{
+            add(findViewById(R.id.Kueche_Temp));
+            add(findViewById(R.id.Kueche_Hum));
+        }});
+        Devices.put(new Temperatur("Bad"), new ArrayList<View>() {{
+            add(findViewById(R.id.Bad_Temp));
+            add(findViewById(R.id.Bad_Hum));
+        }});
+        Devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Schlafzimmer_Temp));
+            add(findViewById(R.id.Schlafzimmer_Hum));
+        }});
 
         // normaler Timer zum Aktualisieren der Geräte
         this.registerUpdateTimer(TIMER_INTERVAL, true);
@@ -71,12 +91,13 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
      * Initialisiert einen Timer, um die Werte der Geräte zu aktualisieren.
      *
      * @param interval Intervall in Millisekunden bis der Timer abläuft
-     * @param restart Flag, ob der Timer nach Ablauf wieder gestartet werden soll
+     * @param restart  Flag, ob der Timer nach Ablauf wieder gestartet werden soll
      */
     private void registerUpdateTimer(int interval, final boolean restart) {
         new CountDownTimer(interval, 1000) {
 
-            public void onTick(long millisUntilFinished) {}
+            public void onTick(long millisUntilFinished) {
+            }
 
             public void onFinish() {
                 Log.d(TAG, "Timer abgelaufen");
@@ -104,7 +125,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
      * Übernimmt das Menu für die ActionBar
      *
      * @param menu Menu
-     *
      * @return bool
      */
     @Override
@@ -176,22 +196,22 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
         try {
             Thread.sleep(500);
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
 
         Set<Map.Entry<Device, List<View>>> entries = this.Devices.entrySet();
 
         for (Map.Entry<Device, List<View>> entry : entries) {
-            Device device       = entry.getKey();
-            List<View> views    = entry.getValue();
+            Device device = entry.getKey();
+            List<View> views = entry.getValue();
 
             if (device instanceof Light) {
                 ((Switch) views.get(0)).setChecked(((Light) device).getStatus());
             }
 
             if (device instanceof Temperatur) {
-                DecimalFormat formatter = (DecimalFormat)NumberFormat.getNumberInstance(Locale.ENGLISH);
+                DecimalFormat formatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.ENGLISH);
                 formatter.applyPattern("##.#");
 
                 String temp = String.format(getResources().getString(R.string.temp), formatter.format(((Temperatur) device).getTemperature()));
@@ -216,7 +236,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
      * Button in ActionBar wird ausgewählt
      *
      * @param item Item das ausgewählt wurde
-     *
      * @return bool
      */
     @Override
@@ -278,7 +297,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
 
     private Device getDeviceByName(String name) {
-        for(Device device : this.Devices.keySet()) {
+        for (Device device : this.Devices.keySet()) {
             if (device.getName().equals(name)) {
                 return device;
             }

@@ -16,8 +16,8 @@ public class AxisValueFormatter implements IAxisValueFormatter
     // Log-Tag für diese Klasse
     private static final String TAG = "AxisValueFormatter";
 
-    private DateFormat mDataFormat;
-    private Date mDate;
+    private final DateFormat mDataFormat;
+    private final Date mDate;
 
 
     public AxisValueFormatter() {
