@@ -42,12 +42,14 @@
                 android:id="@+id/daysRange"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
-                android:ems="4"
+                android:layout_marginLeft="-7dp"
+                android:background="@drawable/tablerow_border"
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="@string/days"
                 android:inputType="number"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
                 android:text="@string/days_default_value"
                 android:textColor="@android:color/black" />
 
@@ -55,7 +57,7 @@
                 android:id="@+id/daysGreater"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
+                android:layout_marginLeft="-5dp"
                 android:onClick="increaseDays"
                 android:text="@string/greater"
                 android:textSize="19sp" />
@@ -67,7 +69,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/tablerow_border"
-            android:minHeight="440dp">
+            android:minHeight="435dp">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
