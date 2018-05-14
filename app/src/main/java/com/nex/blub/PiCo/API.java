@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 
 /**
@@ -138,5 +140,18 @@ public class API extends AsyncTask<String, Void, String>  {
                 this.callBackObj.receiveResult(result);
             }
         }
+    }
+
+
+    public static boolean isPiAvailable() {
+        try {
+            return InetAddress.getByName(SERVER_IP).isReachable(1000);
+        } catch (UnknownHostException ex) {
+            Log.e(TAG, "Unbekannter Host: " + ex.getMessage());
+        } catch (IOException ex) {
+            Log.e(TAG, "I/O-Exception bei der Abfrage, ob Pi verfügbar ist: " + ex.getMessage());
+        }
+
+        return false;
     }
 }

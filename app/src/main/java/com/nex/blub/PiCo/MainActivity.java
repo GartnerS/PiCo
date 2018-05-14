@@ -3,8 +3,11 @@ package com.nex.blub.PiCo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -77,10 +80,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
             add(findViewById(R.id.Schlafzimmer_Hum));
         }});
 
-        // normaler Timer zum Aktualisieren der Geräte
-        this.registerUpdateTimer(TIMER_INTERVAL, true);
-        // Timer um nach dem Laden der View die Werte der Geräte zu laden
-        this.registerUpdateTimer(1000, false);
+        this.setDeviceUpdater();
 
         swipeRefreshLayout = findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -190,6 +190,12 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
      * Ruft bei allen Devices die update()-Methode auf
      */
     private void updateAllDevices() {
+
+        if (!this.checkWifiOnAndConnected()) {
+            Log.e(TAG, "Abfrage der Device-Werte nicht möglich, da nicht mit WLAN verbunden oder PI nicht verfügbar");
+            return;
+        }
+
         for (Device d : this.Devices.keySet()) {
             d.update();
         }
@@ -296,6 +302,19 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
+    private void setDeviceUpdater() {
+         //&& API.isPiAvailable()
+        // Timer nur setzen, wenn mit WLAN verbunden und Pi verfügbar ist
+        if (this.checkWifiOnAndConnected()) {
+            // normaler Timer zum Aktualisieren der Geräte
+            this.registerUpdateTimer(TIMER_INTERVAL, true);
+            // Timer um nach dem Laden der View die Werte der Geräte zu laden
+            this.registerUpdateTimer(1000, false);
+        }
+    }
+
+
+    @Nullable
     private Device getDeviceByName(String name) {
         for (Device device : this.Devices.keySet()) {
             if (device.getName().equals(name)) {
@@ -304,5 +323,17 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
         }
 
         return null;
+    }
+
+
+    private boolean checkWifiOnAndConnected() {
+        WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        if (wifiMgr != null && wifiMgr.isWifiEnabled()) {
+            WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+            return (wifiInfo.getNetworkId() != -1);
+        }
+
+        return false;
     }
 }

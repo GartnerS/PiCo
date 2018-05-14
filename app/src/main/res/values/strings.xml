@@ -29,4 +29,5 @@
     <string name="days_default_value">1</string>
     <string name="lower">&lt;</string>
     <string name="greater">&gt;</string>
+    <string name="no_PI_connectivity">Abfrage der Werte nicht möglich</string>
 </resources>
