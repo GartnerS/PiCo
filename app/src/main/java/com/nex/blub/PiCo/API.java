@@ -3,7 +3,6 @@ package com.nex.blub.PiCo;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.interfaces.HasHistoryData;
 
 import java.io.BufferedReader;
@@ -11,9 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 
 
 /**
@@ -30,11 +27,12 @@ public class API extends AsyncTask<String, Void, String>  {
     // Port für die API-Anfrage
     private Integer Port = 80;
 
-    // Flag, ob die historischen Daten abfragen werden sollen
-    private boolean useHistoryAPI = false;
-
     // Wenn != null, dann wird nach einem Request die Methode "receiveResult(string)" des Objekts aufgerufen.
-    private Device callBackObj;
+    private HasHistoryData callBackObj;
+
+
+    //  Referenz, auf einen DeviceUpdater, der mit dem Ergebnis der API-Abfrage benachrichtig wird
+    private DeviceUpdater deviceUpdater;
 
 
     /**
@@ -46,11 +44,11 @@ public class API extends AsyncTask<String, Void, String>  {
     /**
      * Konstruktor
      *
-     * @param callBackObj Device-Objekt dessen Methode "receiveResult(string)"  nach einem Request
-     *                    aufgerufen werden soll
+     * @param deviceUpdater Updater dessen Methode "receiveResult(string)"  nach einem Request
+     *                      aufgerufen werden soll
      */
-    public API(Device callBackObj) {
-        this.callBackObj = callBackObj;
+    public API(DeviceUpdater deviceUpdater) {
+        this.deviceUpdater = deviceUpdater;
     }
 
 
@@ -59,11 +57,11 @@ public class API extends AsyncTask<String, Void, String>  {
      *
      * @param callBackObj Device-Objekt dessen Methode "receiveResult(string)"  nach einem Request
      *                    aufgerufen werden soll
+     * @param useHistoryAPI Flag, die angibt, ob die API für die historischen Daten verwerndet werden soll
      */
-    public API(Device callBackObj, boolean useHistoryAPI) {
+    public API(HasHistoryData callBackObj, boolean useHistoryAPI) {
         this.callBackObj = callBackObj;
         this.Port = (useHistoryAPI ? 8181 : 80);
-        this.useHistoryAPI = useHistoryAPI;
     }
 
 
@@ -75,6 +73,7 @@ public class API extends AsyncTask<String, Void, String>  {
             return "Unable to retrieve web page. URL may be invalid.";
         }
     }
+
 
     // Given a URL, establishes an HttpUrlConnection and retrieves
     // the web page content as a InputStream, which it returns as
@@ -134,24 +133,12 @@ public class API extends AsyncTask<String, Void, String>  {
     protected void onPostExecute(String result) {
         // Falls ein Callback-Objekt registriert wurde
         if (this.callBackObj != null) {
-            if (this.useHistoryAPI) {
-                ((HasHistoryData) this.callBackObj).receiveHistoryResult(result);
-            } else {
-                this.callBackObj.receiveResult(result);
-            }
-        }
-    }
-
-
-    public static boolean isPiAvailable() {
-        try {
-            return InetAddress.getByName(SERVER_IP).isReachable(1000);
-        } catch (UnknownHostException ex) {
-            Log.e(TAG, "Unbekannter Host: " + ex.getMessage());
-        } catch (IOException ex) {
-            Log.e(TAG, "I/O-Exception bei der Abfrage, ob Pi verfügbar ist: " + ex.getMessage());
+            this.callBackObj.receiveHistoryResult(result);
+            return;
         }
 
-        return false;
+        if (this.deviceUpdater != null) {
+            this.deviceUpdater.receiveResults(result);
+        }
     }
 }

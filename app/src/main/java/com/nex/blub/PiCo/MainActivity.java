@@ -3,13 +3,9 @@ package com.nex.blub.PiCo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,26 +16,24 @@ import android.widget.TextView;
 import com.nex.blub.PiCo.devices.Light;
 import com.nex.blub.PiCo.devices.Temperatur;
 import com.nex.blub.PiCo.interfaces.Device;
+import com.nex.blub.PiCo.interfaces.Notifiable;
 import com.nex.blub.PiCo.interfaces.PimaticActivity;
+import com.nex.blub.PiCo.utils.StringUtils;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 
-public class MainActivity extends Activity implements PimaticActivity, SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = "MainAcivity";
-
-    private static final int TIMER_INTERVAL = 60000; // = 1min
+public class MainActivity extends Activity implements PimaticActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
 
     private boolean isActivityInForeground = false;
 
-    private final Map<Device, List<View>> Devices = new HashMap<>();
+    private final Map<Device, List<View>> devices = new HashMap<>();
+
+    private DeviceUpdater deviceUpdater;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -50,63 +44,41 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
         setContentView(R.layout.overview);
 
         // Alle Geräte der Map hinzufügen
-        Devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
+        devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
             add(findViewById(R.id.button_licht));
         }});
-        Devices.put(new Light("EsszimmerLicht"), new ArrayList<View>() {{
+        devices.put(new Light("EsszimmerLicht"), new ArrayList<View>() {{
             add(findViewById(R.id.button_licht_esszimmer));
         }});
-        Devices.put(new Temperatur("Wohnzimmer"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Wohnzimmer"), new ArrayList<View>() {{
             add(findViewById(R.id.Wohnzimmer_Temp));
             add(findViewById(R.id.Wohnzimmer_Hum));
         }});
-        Devices.put(new Temperatur("Arbeitszimmer"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Arbeitszimmer"), new ArrayList<View>() {{
             add(findViewById(R.id.Arbeitszimmer_Temp));
         }});
-        Devices.put(new Temperatur("Draussen"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Draussen"), new ArrayList<View>() {{
             add(findViewById(R.id.Draussen_Temp));
             add(findViewById(R.id.Draussen_Hum));
         }});
-        Devices.put(new Temperatur("Kueche"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Kueche"), new ArrayList<View>() {{
             add(findViewById(R.id.Kueche_Temp));
             add(findViewById(R.id.Kueche_Hum));
         }});
-        Devices.put(new Temperatur("Bad"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Bad"), new ArrayList<View>() {{
             add(findViewById(R.id.Bad_Temp));
             add(findViewById(R.id.Bad_Hum));
         }});
-        Devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
+        devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
             add(findViewById(R.id.Schlafzimmer_Temp));
             add(findViewById(R.id.Schlafzimmer_Hum));
         }});
 
-        this.setDeviceUpdater();
+        this.deviceUpdater = new DeviceUpdater(this, 60000);
+        this.deviceUpdater.update();
 
         swipeRefreshLayout = findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
-    }
-
-
-    /**
-     * Initialisiert einen Timer, um die Werte der Geräte zu aktualisieren.
-     *
-     * @param interval Intervall in Millisekunden bis der Timer abläuft
-     * @param restart  Flag, ob der Timer nach Ablauf wieder gestartet werden soll
-     */
-    private void registerUpdateTimer(int interval, final boolean restart) {
-        new CountDownTimer(interval, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                Log.d(TAG, "Timer abgelaufen");
-                updateAllDevices();
-                if (restart) {
-                    this.start();
-                }
-            }
-        }.start();
     }
 
 
@@ -115,7 +87,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
      */
     @Override
     public void onRefresh() {
-        this.updateAllDevices();
+        this.deviceUpdater.update();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -139,7 +111,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     protected void onResume() {
         super.onResume();
         this.isActivityInForeground = true;
-        this.updateAllDevices();
+        this.deviceUpdater.update();
     }
 
 
@@ -187,58 +159,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
 
     /**
-     * Ruft bei allen Devices die update()-Methode auf
-     */
-    private void updateAllDevices() {
-
-        if (!this.checkWifiOnAndConnected()) {
-            Log.e(TAG, "Abfrage der Device-Werte nicht möglich, da nicht mit WLAN verbunden oder PI nicht verfügbar");
-            return;
-        }
-
-        for (Device d : this.Devices.keySet()) {
-            d.update();
-        }
-
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-
-        Set<Map.Entry<Device, List<View>>> entries = this.Devices.entrySet();
-
-        for (Map.Entry<Device, List<View>> entry : entries) {
-            Device device = entry.getKey();
-            List<View> views = entry.getValue();
-
-            if (device instanceof Light) {
-                ((Switch) views.get(0)).setChecked(((Light) device).getStatus());
-            }
-
-            if (device instanceof Temperatur) {
-                DecimalFormat formatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.ENGLISH);
-                formatter.applyPattern("##.#");
-
-                String temp = String.format(getResources().getString(R.string.temp), formatter.format(((Temperatur) device).getTemperature()));
-
-                if (views.get(0) == null) {
-                    continue;
-                }
-                ((TextView) views.get(0)).setText(temp);
-
-                if (views.size() > 1) {
-                    String hum = String.format(getResources().getString(R.string.hum), formatter.format(((Temperatur) device).getHumidity()));
-                    ((TextView) views.get(1)).setText(hum);
-                }
-            }
-        }
-
-        Notifier.showToast(this, R.string.values_refreshed);
-    }
-
-
-    /**
      * Button in ActionBar wird ausgewählt
      *
      * @param item Item das ausgewählt wurde
@@ -248,7 +168,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                updateAllDevices();
+                this.deviceUpdater.update();
                 break;
             case R.id.action_show_settings:
                 showSettings();
@@ -257,12 +177,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
                 break;
         }
         return true;
-    }
-
-
-    private void showSettings() {
-        Intent settingsAcitivity = new Intent(this, Settings.class);
-        startActivity(settingsAcitivity);
     }
 
 
@@ -302,38 +216,60 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
-    private void setDeviceUpdater() {
-         //&& API.isPiAvailable()
-        // Timer nur setzen, wenn mit WLAN verbunden und Pi verfügbar ist
-        if (this.checkWifiOnAndConnected()) {
-            // normaler Timer zum Aktualisieren der Geräte
-            this.registerUpdateTimer(TIMER_INTERVAL, true);
-            // Timer um nach dem Laden der View die Werte der Geräte zu laden
-            this.registerUpdateTimer(1000, false);
+    /**
+     * Callback-Methode, die von DeviceUpdater aufgerufen wird
+     * Ruft die Methoden zum Aktualisieren der Werte der Geräte auf.
+     *
+     * @param result Resultat der API-Abfrage
+     */
+    public void getNotification(String result) {
+        Set<Map.Entry<Device, List<View>>> entries = this.devices.entrySet();
+
+        for (Map.Entry<Device, List<View>> entry : entries) {
+            Device device = entry.getKey();
+            List<View> views = entry.getValue();
+
+            device.updateValues(result);
+
+            if (views.get(0) == null) {
+                continue;
+            }
+
+            if (device instanceof Light) {
+                ((Switch) views.get(0)).setChecked(((Light) device).getStatus());
+            }
+
+            if (device instanceof Temperatur) {
+                Temperatur temperatur = (Temperatur) device;
+
+                String temp = String.format(getResources().getString(R.string.temp), StringUtils.formatDoubleToDecimal(temperatur.getTemperature()));
+                ((TextView) views.get(0)).setText(temp);
+
+                if (views.size() > 1) {
+                    String hum = String.format(getResources().getString(R.string.hum), StringUtils.formatDoubleToDecimal(temperatur.getHumidity()));
+                    ((TextView) views.get(1)).setText(hum);
+                }
+            }
         }
+
+        Notifier.showToast(this, R.string.values_refreshed);
+    }
+
+
+    private void showSettings() {
+        Intent settingsAcitivity = new Intent(this, Settings.class);
+        startActivity(settingsAcitivity);
     }
 
 
     @Nullable
     private Device getDeviceByName(String name) {
-        for (Device device : this.Devices.keySet()) {
+        for (Device device : this.devices.keySet()) {
             if (device.getName().equals(name)) {
                 return device;
             }
         }
 
         return null;
-    }
-
-
-    private boolean checkWifiOnAndConnected() {
-        WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-
-        if (wifiMgr != null && wifiMgr.isWifiEnabled()) {
-            WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
-            return (wifiInfo.getNetworkId() != -1);
-        }
-
-        return false;
     }
 }

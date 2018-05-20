@@ -65,22 +65,12 @@ public class Light implements Device {
 
 
     /**
-     * Der Status der Lampe soll abgefragt bzw. aktualisiert werden.
-     * Nach dem API-Request wird automatisch die Methode "receiveResult(string)" aufgerufen
-     * und das Ergebnis dort weiter verarbeitet.
-     */
-    public void update() {
-        new API(this).execute("values");
-    }
-
-
-    /**
      * Wird nach einem API-Request automatisch aufgerufen, sofern die Instanz als Callback-Objekt
      * bei der API registriert ist.
      *
      * @param result Das Ergebnis des API-Request (Antwort der API)
      */
-    public void receiveResult(String result) {
+    public void updateValues(String result) {
         JSONObject object = JSONUtils.getValuesByDeviceName(result, this.name);
         if (object != null) {
             boolean isLightOn = false;
@@ -91,7 +81,7 @@ public class Light implements Device {
             }
 
             this.isOn = isLightOn;
-            Log.d(TAG, "Neuer Status des Lichts ist: " + this.isOn);
+            Log.d(TAG, "Status des Lichts '" + this.name + "' ist: " + this.isOn);
         }
     }
 

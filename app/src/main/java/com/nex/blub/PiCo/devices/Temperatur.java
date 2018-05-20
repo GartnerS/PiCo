@@ -49,19 +49,11 @@ public class Temperatur implements Device, HasHistoryData {
     }
 
 
-    /**
-     *  Abfrage der aktuellen Werte des Devices
-     */
-    public void update() {
-        new API(this).execute("values");
-    }
-
-
     /*
      * Methode, die das Ergebnis einer API-Abfrage verarbeitet
      * Wird durch die API-Instanz aufgerufen.
      */
-    public void receiveResult(String result) {
+    public void updateValues(String result) {
         JSONObject object = JSONUtils.getValuesByDeviceName(result, this.name);
         if (object != null) {
             this.setCurrentValues(object);
@@ -74,7 +66,7 @@ public class Temperatur implements Device, HasHistoryData {
      *
      * @param data JSONObject, das die aktuellen Werte des Device beinhaltet
      */
-    private void setCurrentValues(JSONObject data) {
+    public void setCurrentValues(JSONObject data) {
         try {
             this.temperature    = data.getDouble("temperature");
             this.humidity       = data.getDouble("humidity");
