@@ -22,7 +22,6 @@ public class HistoryChart  {
     private final static int COLOR_HUM      = Color.rgb(107, 191, 109);
     private final static String LABEL_TEMP  = "Temperatur";
     private final static String LABEL_HUM   = "Luftfeuchtigkeit";
-    private final static String LABEL_AVG   = "Durchschnitt";
 
     private final LineChart chart;
     private final ShowHistoryData view;
