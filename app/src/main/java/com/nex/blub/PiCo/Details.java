@@ -26,12 +26,16 @@ public class Details extends Activity implements ShowHistoryData {
     // Log-Tag für diese Klasse
     private static final String TAG = "Details";
 
+    // Name des Devices und Titel der View
     private String title;
 
+    // Referenz auf das Device, dessen historische Daten angezeigt werden
     private HasHistoryData device;
 
+    // Referenz auf die Chart, die die Daten visualisiert
     private HistoryChart chart;
 
+    // Referenz auf die Eingabemaske für die Anzahl der Tage
     private EditText daysRangeSelect;
 
 
@@ -136,16 +140,32 @@ public class Details extends Activity implements ShowHistoryData {
     }
 
 
+    /**
+     * OnClick-Handler zum Herunterzählen der Tage
+     *
+     * @param view View, die diesen Handler referenziert
+     */
     public void decreaseDays(View view) {
         this.changeSelectedDays(false);
     }
 
 
+
+    /**
+     * OnClick-Handler zum Hochzählen der Tage
+     *
+     * @param view View, die diesen Handler referenziert
+     */
     public void increaseDays(View view) {
         this.changeSelectedDays(true);
     }
 
 
+    /**
+     * Aktualisiert die Anzeige der Tage, wenn die Buttons zum Hoch-/Herunterzählen geklickt wurden
+     *
+     * @param increase Flag, das angibt, ob die Anzahl hoch- oder heruntergezählt wurde
+     */
     private void changeSelectedDays(boolean increase) {
         if (this.daysRangeSelect == null) {
             return;
