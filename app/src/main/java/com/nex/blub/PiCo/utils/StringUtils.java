@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class StringUtils {
 
-    private static DecimalFormat formatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.ENGLISH);
+    private static final DecimalFormat formatter = (DecimalFormat) NumberFormat.getNumberInstance(Locale.ENGLISH);
 
     public static String formatDoubleToDecimal(Double value) {
         formatter.applyPattern("##.#");
