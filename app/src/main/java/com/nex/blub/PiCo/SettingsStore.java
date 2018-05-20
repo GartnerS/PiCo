@@ -8,7 +8,7 @@ public class SettingsStore {
 
     private final SharedPreferences sharedPref;
 
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences.Editor editor;
 
     public SettingsStore(Activity activity) {
         this.sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
