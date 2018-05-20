@@ -11,7 +11,7 @@ public class DeviceUpdater {
     // Log-Tag für diese Klasse
     private static final String TAG = "DeviceUpdater";
 
-    private Notifiable receiver;
+    private final Notifiable receiver;
 
 
     public DeviceUpdater(Notifiable receiver, int updateInterval) {
