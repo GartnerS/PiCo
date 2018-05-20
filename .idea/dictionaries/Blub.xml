@@ -4,12 +4,14 @@
       <w>abfrage</w>
       <w>abfragen</w>
       <w>abgefragt</w>
+      <w>abgefragte</w>
       <w>abgelaufen</w>
       <w>ablauf</w>
       <w>abläuft</w>
       <w>acitivity</w>
       <w>acivity</w>
       <w>adresse</w>
+      <w>aktualisert</w>
       <w>aktualisieren</w>
       <w>aktualisiert</w>
       <w>aktualisierung</w>
@@ -20,9 +22,13 @@
       <w>aktueller</w>
       <w>aktulle</w>
       <w>alle</w>
+      <w>angegeben</w>
       <w>angeklickt</w>
       <w>angezeigt</w>
+      <w>angibt</w>
+      <w>anhand</w>
       <w>antwort</w>
+      <w>anzahl</w>
       <w>anzeige</w>
       <w>anzeigen</w>
       <w>anzeigt</w>
@@ -37,6 +43,7 @@
       <w>befindet</w>
       <w>beim</w>
       <w>beinhaltet</w>
+      <w>benachrichtig</w>
       <w>benötigt</w>
       <w>blub</w>
       <w>dann</w>
@@ -45,21 +52,29 @@
       <w>daten</w>
       <w>dessen</w>
       <w>detailwerte</w>
+      <w>diagramm</w>
       <w>dient</w>
       <w>diese</w>
+      <w>diesen</w>
       <w>dort</w>
       <w>draussen</w>
       <w>durch</w>
+      <w>durchschnitt</w>
+      <w>durchschnittswert</w>
       <w>eigene</w>
       <w>eine</w>
       <w>einem</w>
       <w>einen</w>
       <w>einer</w>
       <w>eines</w>
+      <w>eingabemaske</w>
+      <w>eingegebener</w>
       <w>eingerichteten</w>
       <w>eingeschaltet</w>
       <w>einstellen</w>
       <w>einstellungen</w>
+      <w>eintrag</w>
+      <w>einzelwerten</w>
       <w>entsprechender</w>
       <w>entspricht</w>
       <w>ergebnis</w>
@@ -69,20 +84,31 @@
       <w>esszimmer</w>
       <w>esszimmerlampe</w>
       <w>festlegen</w>
+      <w>geklickt</w>
       <w>gerade</w>
       <w>gerät</w>
       <w>geräte</w>
       <w>geräts</w>
       <w>gesendet</w>
       <w>gestartet</w>
+      <w>geupdatet</w>
       <w>geändert</w>
       <w>gibt</w>
       <w>gruppiert</w>
+      <w>heruntergezählt</w>
+      <w>herunterzählen</w>
       <w>hinzufügen</w>
+      <w>historische</w>
+      <w>histroy</w>
+      <w>hoch</w>
+      <w>hochzählen</w>
       <w>implementieren</w>
       <w>initialisiert</w>
       <w>instanz</w>
       <w>intervall</w>
+      <w>invalide</w>
+      <w>jedes</w>
+      <w>kein</w>
       <w>klasse</w>
       <w>konstruktor</w>
       <w>kueche</w>
@@ -97,8 +123,10 @@
       <w>luftfeuchtigkeitswert</w>
       <w>luftfeuchtigkeitswerte</w>
       <w>lüften</w>
+      <w>maximalwert</w>
       <w>methode</w>
       <w>millisekunden</w>
+      <w>minimumwert</w>
       <w>minuten</w>
       <w>misst</w>
       <w>myurl</w>
@@ -106,34 +134,50 @@
       <w>nachricht</w>
       <w>namen</w>
       <w>namens</w>
+      <w>neuen</w>
       <w>neuer</w>
+      <w>neugezeichnet</w>
+      <w>neuzeichnen</w>
       <w>normaler</w>
+      <w>notifiable</w>
       <w>objekt</w>
       <w>objekts</w>
       <w>pimatic</w>
       <w>playstore</w>
+      <w>quicksettings</w>
+      <w>referenz</w>
+      <w>referenziert</w>
+      <w>registriere</w>
       <w>registriert</w>
       <w>ruft</w>
       <w>schlafzimmer</w>
       <w>schriftgröße</w>
       <w>sendet</w>
       <w>setzen</w>
+      <w>setzt</w>
       <w>sich</w>
+      <w>signin</w>
       <w>sofern</w>
       <w>soll</w>
       <w>sollen</w>
       <w>sollten</w>
       <w>speichern</w>
+      <w>statistischen</w>
       <w>swiperefresh</w>
       <w>tabelle</w>
       <w>tablerow</w>
+      <w>tage</w>
       <w>temperatur</w>
       <w>temperaturwerte</w>
       <w>termperatur</w>
       <w>textes</w>
+      <w>titel</w>
       <w>togglen</w>
       <w>updaten</w>
+      <w>verantwortlich</w>
       <w>verarbeitet</w>
+      <w>verwerndet</w>
+      <w>visualisiert</w>
       <w>vordergrund</w>
       <w>weiter</w>
       <w>wenn</w>
@@ -149,6 +193,7 @@
       <w>wurde</w>
       <w>wurden</w>
       <w>zeigt</w>
+      <w>zurück</w>
       <w>zurückliefern</w>
       <w>zustand</w>
       <w>über</w>
