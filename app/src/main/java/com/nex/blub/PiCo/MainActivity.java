@@ -111,7 +111,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     protected void onResume() {
         super.onResume();
         this.isActivityInForeground = true;
-        this.deviceUpdater.update();
     }
 
 
