@@ -3,7 +3,7 @@ package com.nex.blub.PiCo.interfaces;
 import android.content.Context;
 
 
-public interface PimaticActivity {
+public interface PiCoActivity {
 
     // Liefert den aktuellen Context der Activity zurück
     Context getContext();

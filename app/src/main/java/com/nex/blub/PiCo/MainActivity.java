@@ -17,7 +17,7 @@ import com.nex.blub.PiCo.devices.Light;
 import com.nex.blub.PiCo.devices.Temperatur;
 import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.interfaces.Notifiable;
-import com.nex.blub.PiCo.interfaces.PimaticActivity;
+import com.nex.blub.PiCo.interfaces.PiCoActivity;
 import com.nex.blub.PiCo.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class MainActivity extends Activity implements PimaticActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
+public class MainActivity extends Activity implements PiCoActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
 
     private boolean isActivityInForeground = false;
 
