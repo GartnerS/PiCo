@@ -83,7 +83,7 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
 
 
     /**
-     * This method is called when swipe refresh is pulled down
+     * Wird aufgerufen, wenn in der View "nach unten" gezogen wird.
      */
     @Override
     public void onRefresh() {
@@ -107,6 +107,9 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
+    /**
+     * Wird aufgerufen, wenn die View wieder in der Vordergrund kommt
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -114,6 +117,9 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
+    /**
+     * Wird aufgerufen, wenn die View nicht mehr im Vordergrund ist
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -147,16 +153,6 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
-    public boolean isInForeground() {
-        return this.isActivityInForeground;
-    }
-
-
-    public Context getContext() {
-        return this.getBaseContext();
-    }
-
-
     /**
      * Button in ActionBar wird ausgewählt
      *
@@ -179,6 +175,12 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
+    /**
+     * OnClick-Methode für die Temperaturgeräte
+     * Startet eine neue Detail-View
+     *
+     * @param view View, dessen OnClick-Event diese Methode referenziert
+     */
     public void showDetails(View view) {
         Intent detailActivity = new Intent(this, Details.class);
 
@@ -255,12 +257,41 @@ public class MainActivity extends Activity implements PimaticActivity, SwipeRefr
     }
 
 
+    /**
+     * Getter für 'isActivityInForeground'
+     *
+     * @return Gibt an, ob die View im Vordergrund ist
+     */
+    public boolean isInForeground() {
+        return this.isActivityInForeground;
+    }
+
+
+    /**
+     * Getter für den Context
+     *
+     * @return aktueller Context
+     */
+    public Context getContext() {
+        return this.getBaseContext();
+    }
+
+
+    /**
+     * Startet eine neue Settings-View
+     */
     private void showSettings() {
         Intent settingsAcitivity = new Intent(this, Settings.class);
         startActivity(settingsAcitivity);
     }
 
 
+    /**
+     * Liefert zu einem Gerätename eine entsprechende Referenz auf ein Device-Objekt
+     *
+     * @param name Name des Geräts
+     * @return Referenz auf ein Device-Objekts
+     */
     @Nullable
     private Device getDeviceByName(String name) {
         for (Device device : this.devices.keySet()) {
