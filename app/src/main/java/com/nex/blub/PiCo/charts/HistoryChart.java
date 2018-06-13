@@ -13,11 +13,13 @@ import com.nex.blub.PiCo.utils.HistoryData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class HistoryChart  {
 
     private final static int UPPER_LIMIT    = 100;
+    private final static int BOTTOM_LIMIT   = -20;
     private final static int COLOR_TEMP     = Color.rgb(53, 198, 255);
     private final static int COLOR_HUM      = Color.rgb(107, 191, 109);
     private final static String LABEL_TEMP  = "Temperatur";
@@ -74,21 +76,18 @@ public class HistoryChart  {
     public void setData(List<HistoryData> dataList) {
         this.reset();
 
-        float avgTemp = 0;
-        for(HistoryData data : dataList) {
-            if (data.getTemperature() < UPPER_LIMIT) {
-                this.entriesTemp.add(new Entry(data.getTimestamp().floatValue(), data.getTemperature().floatValue()));
-                avgTemp += data.getTemperature().floatValue();
-            }
+        dataList
+            .stream()
+            .filter(entry -> entry.getHumidity() < UPPER_LIMIT && entry.getTemperature() < UPPER_LIMIT)
+            .filter(entry -> entry.getHumidity() > BOTTOM_LIMIT && entry.getTemperature() > BOTTOM_LIMIT)
+            .forEach(entry -> {
+                this.entriesHum.add(new Entry(entry.getTimestamp().floatValue(), entry.getHumidity().floatValue()));
+                this.entriesTemp.add(new Entry(entry.getTimestamp().floatValue(), entry.getTemperature().floatValue()));
+            });
 
-            if (data.getHumidity() < UPPER_LIMIT) {
-                this.entriesHum.add(new Entry(data.getTimestamp().floatValue(), data.getHumidity().floatValue()));
-            }
-        }
-
-        if (this.entriesTemp.size() > 0) {
-            avgTemp = avgTemp / this.entriesTemp.size();
-        }
+        double avgTemp = dataList
+                .stream()
+                .collect(Collectors.averagingDouble(entry -> entry.getTemperature()));
 
         this.dataSetTemp.setValues(entriesTemp);
         this.dataSetHum.setValues(entriesHum);
