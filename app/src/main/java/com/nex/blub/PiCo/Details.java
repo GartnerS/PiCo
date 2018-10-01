@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.nex.blub.PiCo.charts.HistoryChart;
 import com.nex.blub.PiCo.devices.Temperatur;
 import com.nex.blub.PiCo.interfaces.HasHistoryData;
@@ -52,14 +51,12 @@ public class Details extends Activity implements ShowHistoryData {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         this.daysRangeSelect = findViewById(R.id.daysRange);
         int days = Integer.valueOf(this.daysRangeSelect.getText().toString());
 
-        this.chart = new HistoryChart((LineChart) findViewById(R.id.chart), this);
+        this.chart = new HistoryChart(findViewById(R.id.chart), this);
 
 
         this.device = new Temperatur(this.title);
