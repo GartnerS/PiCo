@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.nex.blub.PiCo"
-        minSdkVersion 26
+        minSdkVersion 27
         targetSdkVersion 27
         multiDexEnabled true
         versionCode 1
@@ -29,10 +29,11 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:support-media-compat:27.1.1'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.google.firebase:firebase-appindexing:15.0.1'
+    implementation 'com.google.firebase:firebase-appindexing:16.0.1'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
     api 'com.android.support:multidex:1.0.3'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
