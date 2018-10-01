@@ -3,9 +3,13 @@ package com.nex.blub.PiCo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +25,7 @@ import com.nex.blub.PiCo.interfaces.PiCoActivity;
 import com.nex.blub.PiCo.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +34,11 @@ import java.util.Set;
 
 public class MainActivity extends Activity implements PiCoActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
 
+    private static boolean activityInitDone = false;
+
     private boolean isActivityInForeground = false;
 
-    private final Map<Device, List<View>> devices = new HashMap<>();
+    private static Map<Device, List<View>> devices;
 
     private DeviceUpdater deviceUpdater;
 
@@ -43,42 +50,48 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
 
-        // Alle Geräte der Map hinzufügen
-        devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
-            add(findViewById(R.id.button_licht));
-        }});
-        devices.put(new Light("EsszimmerLicht"), new ArrayList<View>() {{
-            add(findViewById(R.id.button_licht_esszimmer));
-        }});
-        devices.put(new Temperatur("Wohnzimmer"), new ArrayList<View>() {{
-            add(findViewById(R.id.Wohnzimmer_Temp));
-            add(findViewById(R.id.Wohnzimmer_Hum));
-        }});
-        devices.put(new Temperatur("Arbeitszimmer"), new ArrayList<View>() {{
-            add(findViewById(R.id.Arbeitszimmer_Temp));
-        }});
-        devices.put(new Temperatur("Draussen"), new ArrayList<View>() {{
-            add(findViewById(R.id.Draussen_Temp));
-            add(findViewById(R.id.Draussen_Hum));
-        }});
-        devices.put(new Temperatur("Kueche"), new ArrayList<View>() {{
-            add(findViewById(R.id.Kueche_Temp));
-            add(findViewById(R.id.Kueche_Hum));
-        }});
-        devices.put(new Temperatur("Bad"), new ArrayList<View>() {{
-            add(findViewById(R.id.Bad_Temp));
-            add(findViewById(R.id.Bad_Hum));
-        }});
-        devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
-            add(findViewById(R.id.Schlafzimmer_Temp));
-            add(findViewById(R.id.Schlafzimmer_Hum));
-        }});
+        if (!activityInitDone) {
+            Log.i("Main", "Devices ist leer");
+            this.initDevices();
+            this.deviceUpdater = new DeviceUpdater(this, 60000);
+            this.deviceUpdater.update();
 
-        this.deviceUpdater = new DeviceUpdater(this, 60000);
-        this.deviceUpdater.update();
+            this.initShortCuts();
 
-        swipeRefreshLayout = findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
+            swipeRefreshLayout = findViewById(R.id.swiperefresh);
+            swipeRefreshLayout.setOnRefreshListener(this);
+        }
+
+        String action = getIntent() != null ? getIntent().getAction() : null;
+        if ("TOGGLE_SHORTCUT_WOHNZIMMER".equals(action)) {
+            ((Light) this.getDeviceByName("WohnzimmerLicht")).toggle();
+            MainActivity.this.moveTaskToBack(true);
+        }
+
+        if ("TOGGLE_SHORTCUT_ESSZIMMER".equals(action)) {
+            ((Light) this.getDeviceByName("EsszimmerLicht")).toggle();
+            MainActivity.this.moveTaskToBack(true);
+        }
+    }
+
+
+    private void initShortCuts() {
+        ShortcutInfo wohnzimmer = new ShortcutInfo.Builder(this, "shortcutWohnzimmer")
+                .setShortLabel("Wohnzimmerlicht")
+                .setLongLabel("Wohnzimmerlicht")
+                .setIcon(Icon.createWithResource(getApplicationContext(), R.drawable.light_on))
+                .setIntent(new Intent(this, MainActivity.class).setAction("TOGGLE_SHORTCUT_WOHNZIMMER"))
+                .build();
+
+        ShortcutInfo esszimmer = new ShortcutInfo.Builder(this, "shortcutEsszimmer")
+                .setShortLabel("Esszimmerlicht")
+                .setLongLabel("Esszimmerlicht")
+                .setIcon(Icon.createWithResource(getApplicationContext(), R.drawable.light_on))
+                .setIntent(new Intent(this, MainActivity.class).setAction("TOGGLE_SHORTCUT_ESSZIMMER"))
+                .build();
+
+        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+        shortcutManager.setDynamicShortcuts(Arrays.asList(wohnzimmer, esszimmer));
     }
 
 
@@ -133,22 +146,11 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
      * @param view View, die das toggleEvent aufgerufen hat
      */
     public void toggleLight(View view) {
-        Light light;
-        switch (view.getId()) {
-            case R.id.button_licht:
-                light = ((Light) this.getDeviceByName("WohnzimmerLicht"));
-                if (light != null) {
-                    light.toggle();
-                }
-                break;
-            case R.id.button_licht_esszimmer:
-                light = ((Light) this.getDeviceByName("EsszimmerLicht"));
-                if (light != null) {
-                    light.toggle();
-                }
-                break;
-            default:
-                break;
+        String deviceName = (view.getId() == R.id.button_licht) ? "WohnzimmerLicht" : "EsszimmerLicht";
+
+        Light light = ((Light) this.getDeviceByName(deviceName));
+        if (light != null) {
+            light.toggle();
         }
     }
 
@@ -224,7 +226,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
      * @param result Resultat der API-Abfrage
      */
     public void getNotification(String result) {
-        Set<Map.Entry<Device, List<View>>> entries = this.devices.entrySet();
+        Set<Map.Entry<Device, List<View>>> entries = devices.entrySet();
 
         for (Map.Entry<Device, List<View>> entry : entries) {
             Device device = entry.getKey();
@@ -286,6 +288,47 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
     }
 
 
+    private void initDevices() {
+
+        if (devices == null) {
+            devices = new HashMap<>();
+        }
+
+        // Alle Geräte der Map hinzufügen
+        devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_licht));
+        }});
+        devices.put(new Light("EsszimmerLicht"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_licht_esszimmer));
+        }});
+        devices.put(new Temperatur("Wohnzimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Wohnzimmer_Temp));
+            add(findViewById(R.id.Wohnzimmer_Hum));
+        }});
+        devices.put(new Temperatur("Arbeitszimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Arbeitszimmer_Temp));
+        }});
+        devices.put(new Temperatur("Draussen"), new ArrayList<View>() {{
+            add(findViewById(R.id.Draussen_Temp));
+            add(findViewById(R.id.Draussen_Hum));
+        }});
+        devices.put(new Temperatur("Kueche"), new ArrayList<View>() {{
+            add(findViewById(R.id.Kueche_Temp));
+            add(findViewById(R.id.Kueche_Hum));
+        }});
+        devices.put(new Temperatur("Bad"), new ArrayList<View>() {{
+            add(findViewById(R.id.Bad_Temp));
+            add(findViewById(R.id.Bad_Hum));
+        }});
+        devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
+            add(findViewById(R.id.Schlafzimmer_Temp));
+            add(findViewById(R.id.Schlafzimmer_Hum));
+        }});
+
+        activityInitDone = true;
+    }
+
+
     /**
      * Liefert zu einem Gerätename eine entsprechende Referenz auf ein Device-Objekt
      *
@@ -294,7 +337,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
      */
     @Nullable
     private Device getDeviceByName(String name) {
-        for (Device device : this.devices.keySet()) {
+        for (Device device : devices.keySet()) {
             if (device.getName().equals(name)) {
                 return device;
             }
