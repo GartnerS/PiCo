@@ -91,6 +91,9 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
                 .build();
 
         ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+        if (shortcutManager == null) {
+            return;
+        }
         shortcutManager.setDynamicShortcuts(Arrays.asList(wohnzimmer, esszimmer));
     }
 
