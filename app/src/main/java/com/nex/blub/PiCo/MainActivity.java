@@ -130,6 +130,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
     protected void onResume() {
         super.onResume();
         this.isActivityInForeground = true;
+        this.deviceUpdater.update();
     }
 
 
