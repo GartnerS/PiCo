@@ -99,6 +99,66 @@
 
                         </TableRow>
 
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/Lichterkette1_Label"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:background="@android:color/transparent"
+                                android:gravity="center"
+                                android:text="@string/device_lichterkette1"
+                                android:textColor="@android:color/black"
+                                android:textSize="19sp" />
+
+                            <Switch
+                                android:id="@+id/button_lichterkette1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:checked="false"
+                                android:onClick="toggleLight"
+                                android:textOff="@string/switch_off"
+                                android:textOn="@string/switch_on"
+                                android:textSize="30sp"
+                                android:translationX="-50dp" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/Lichterkette2_Label"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:background="@android:color/transparent"
+                                android:gravity="center"
+                                android:text="@string/device_lichterkette2"
+                                android:textColor="@android:color/black"
+                                android:textSize="19sp" />
+
+                            <Switch
+                                android:id="@+id/button_lichterkette2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:checked="false"
+                                android:onClick="toggleLight"
+                                android:textOff="@string/switch_off"
+                                android:textOn="@string/switch_on"
+                                android:textSize="30sp"
+                                android:translationX="-50dp" />
+
+                        </TableRow>
+
                     </TableLayout>
 
                 </TableRow>
@@ -225,8 +285,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/tablerow_border"
                     android:onClick="showDetails"
                     android:paddingLeft="10dp"

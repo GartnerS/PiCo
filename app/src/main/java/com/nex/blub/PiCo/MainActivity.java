@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
 
     private static Map<Device, List<View>> devices;
 
-    private DeviceUpdater deviceUpdater;
+    private static DeviceUpdater deviceUpdater;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -51,15 +51,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
         setContentView(R.layout.overview);
 
         if (!activityInitDone) {
-            Log.i("Main", "Devices ist leer");
-            this.initDevices();
-            this.deviceUpdater = new DeviceUpdater(this, 60000);
-            this.deviceUpdater.update();
-
-            this.initShortCuts();
-
-            swipeRefreshLayout = findViewById(R.id.swiperefresh);
-            swipeRefreshLayout.setOnRefreshListener(this);
+            this.init();
         }
 
         String action = getIntent() != null ? getIntent().getAction() : null;
@@ -103,7 +95,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
      */
     @Override
     public void onRefresh() {
-        this.deviceUpdater.update();
+        deviceUpdater.update();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -130,7 +122,12 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
     protected void onResume() {
         super.onResume();
         this.isActivityInForeground = true;
-        this.deviceUpdater.update();
+
+        if (deviceUpdater == null || devices.isEmpty()) {
+            this.init();
+        }
+
+        deviceUpdater.update();
     }
 
 
@@ -150,7 +147,28 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
      * @param view View, die das toggleEvent aufgerufen hat
      */
     public void toggleLight(View view) {
-        String deviceName = (view.getId() == R.id.button_licht) ? "WohnzimmerLicht" : "EsszimmerLicht";
+
+        String deviceName = null;
+        switch(view.getId()) {
+            case R.id.button_licht:
+                deviceName = "WohnzimmerLicht";
+                break;
+            case R.id.button_licht_esszimmer:
+                deviceName = "EsszimmerLicht";
+                break;
+            case R.id.button_lichterkette1:
+                deviceName = "Lichterkette1";
+                break;
+            case R.id.button_lichterkette2:
+                deviceName = "Lichterkette2";
+                break;
+            default:
+                break;
+        }
+
+        if (deviceName == null) {
+            return;
+        }
 
         Light light = ((Light) this.getDeviceByName(deviceName));
         if (light != null) {
@@ -169,7 +187,7 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                this.deviceUpdater.update();
+                deviceUpdater.update();
                 break;
             case R.id.action_show_settings:
                 showSettings();
@@ -294,9 +312,11 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
 
     private void initDevices() {
 
-        if (devices == null) {
-            devices = new HashMap<>();
+        if (devices != null && !devices.isEmpty()) {
+            return;
         }
+
+        devices = new HashMap<>();
 
         // Alle Geräte der Map hinzufügen
         devices.put(new Light("WohnzimmerLicht"), new ArrayList<View>() {{
@@ -328,6 +348,12 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
             add(findViewById(R.id.Schlafzimmer_Temp));
             add(findViewById(R.id.Schlafzimmer_Hum));
         }});
+        devices.put(new Light("Lichterkette1"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_lichterkette1));
+        }});
+        devices.put(new Light("Lichterkette2"), new ArrayList<View>() {{
+            add(findViewById(R.id.button_lichterkette2));
+        }});
 
         activityInitDone = true;
     }
@@ -349,4 +375,19 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
 
         return null;
     }
+
+
+    private void init() {
+        Log.i("Main", "Devices ist leer");
+        this.initDevices();
+
+        deviceUpdater = new DeviceUpdater(this, 60000);
+        deviceUpdater.update();
+
+        this.initShortCuts();
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
 }

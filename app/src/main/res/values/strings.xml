@@ -30,4 +30,6 @@
     <string name="lower">&lt;</string>
     <string name="greater">&gt;</string>
     <string name="no_PI_connectivity">Abfrage der Werte nicht möglich</string>
+    <string name="device_lichterkette1">Lichterkette1</string>
+    <string name="device_lichterkette2">Lichterkette2</string>
 </resources>
