@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/playstore_gray"
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -17,7 +16,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/playstore_gray">
+                android:background="@color/PiCo_BrightBlue">
 
                 <!-- WOHNZIMMER-LAMPE -->
 
@@ -27,8 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/tablerow_border"
                     android:padding="15dp">
 
@@ -47,10 +46,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.3"
-                                android:background="@android:color/transparent"
                                 android:gravity="center"
                                 android:text="@string/device_wohnzimmerlampe"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="19sp" />
 
                             <Switch
@@ -82,7 +80,7 @@
                                 android:background="@android:color/transparent"
                                 android:gravity="center"
                                 android:text="@string/device_esszimmerlampe"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="19sp" />
 
                             <Switch
@@ -112,7 +110,7 @@
                                 android:background="@android:color/transparent"
                                 android:gravity="center"
                                 android:text="@string/device_lichterkette1"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="19sp" />
 
                             <Switch
@@ -142,7 +140,7 @@
                                 android:background="@android:color/transparent"
                                 android:gravity="center"
                                 android:text="@string/device_lichterkette2"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="19sp" />
 
                             <Switch
@@ -187,7 +185,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_wohnzimmertemp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -206,7 +204,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -220,7 +218,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -245,7 +243,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_arbeitszimmer"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -264,7 +262,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
                     </TableLayout>
@@ -300,7 +298,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_draussen"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -319,7 +317,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -333,7 +331,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -358,7 +356,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_bad"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -377,7 +375,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -391,7 +389,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -416,7 +414,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_kueche"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -435,7 +433,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -449,7 +447,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -473,7 +471,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/device_schlafzimmer"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/PiCo_TextColor"
                         android:textSize="19sp" />
 
                     <TableLayout
@@ -492,7 +490,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 
@@ -506,7 +504,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="@string/no_value"
-                                android:textColor="@android:color/black"
+                                android:textColor="@color/PiCo_TextColor"
                                 android:textSize="18sp" />
                         </TableRow>
 

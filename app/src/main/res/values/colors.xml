@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorPrimaryDark">#efefef</color>
     <color name="playstore_gray">#efefef</color>
+    <color name="PiCo_DarkBlue">#1d89a2</color>
+    <color name="PiCo_MiddleBlue">#2bb5d5</color>
+    <color name="PiCo_BrightBlue">#bbd4da</color>
+    <color name="PiCo_TextColor">#346278</color>
 </resources>
+
