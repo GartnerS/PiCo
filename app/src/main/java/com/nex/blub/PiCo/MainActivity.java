@@ -34,8 +34,6 @@ import java.util.Set;
 
 public class MainActivity extends Activity implements PiCoActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
 
-    private static boolean activityInitDone = false;
-
     private boolean isActivityInForeground = false;
 
     private static Map<Device, List<View>> devices;
@@ -50,18 +48,20 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
 
-        if (!activityInitDone) {
-            this.init();
-        }
+        this.init();
 
         String action = getIntent() != null ? getIntent().getAction() : null;
+        Light light = null;
         if ("TOGGLE_SHORTCUT_WOHNZIMMER".equals(action)) {
-            ((Light) this.getDeviceByName("WohnzimmerLicht")).toggle();
-            MainActivity.this.moveTaskToBack(true);
+            light = ((Light) this.getDeviceByName("WohnzimmerLicht"));
         }
 
         if ("TOGGLE_SHORTCUT_ESSZIMMER".equals(action)) {
-            ((Light) this.getDeviceByName("EsszimmerLicht")).toggle();
+            light = ((Light) this.getDeviceByName("EsszimmerLicht"));
+        }
+
+        if (light != null) {
+            light.toggle();
             MainActivity.this.moveTaskToBack(true);
         }
     }
@@ -354,8 +354,6 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
         devices.put(new Light("Lichterkette2"), new ArrayList<View>() {{
             add(findViewById(R.id.button_lichterkette2));
         }});
-
-        activityInitDone = true;
     }
 
 

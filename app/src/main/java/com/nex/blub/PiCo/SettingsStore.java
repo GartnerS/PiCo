@@ -13,6 +13,7 @@ public class SettingsStore {
     public SettingsStore(Activity activity) {
         this.sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         this.editor = this.sharedPref.edit();
+        this.editor.commit();
     }
 
     public void write(String key, boolean value) {

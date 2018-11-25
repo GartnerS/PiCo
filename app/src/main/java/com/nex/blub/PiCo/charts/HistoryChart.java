@@ -87,7 +87,7 @@ public class HistoryChart  {
 
         double avgTemp = dataList
                 .stream()
-                .collect(Collectors.averagingDouble(entry -> entry.getTemperature()));
+                .collect(Collectors.averagingDouble(HistoryData::getTemperature));
 
         this.dataSetTemp.setValues(entriesTemp);
         this.dataSetHum.setValues(entriesHum);
