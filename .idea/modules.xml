@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PiCo.iml" filepath="$PROJECT_DIR$/.idea/PiCo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PiCo.iml" filepath="$PROJECT_DIR$/PiCo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -11,7 +11,7 @@
     <style name="PiCoTest" parent="android:Theme.Material" >
         <item name="android:statusBarColor">?android:attr/colorAccent</item>
         <item name="android:navigationBarColor">?android:attr/colorAccent</item>
-        <item name="android:colorBackground">@color/PiCo_BrightBlue</item>
+        <item name="android:colorBackground">@color/PiCo_DarkBlue</item>
         <item name="android:colorPrimaryDark">@color/PiCo_DarkBlue</item>
         <item name="android:colorPrimary">@color/PiCo_DarkBlue</item>
         <item name="android:colorAccent">@color/PiCo_DarkBlue</item>

@@ -156,12 +156,6 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
             case R.id.button_licht_esszimmer:
                 deviceName = "EsszimmerLicht";
                 break;
-            case R.id.button_lichterkette1:
-                deviceName = "Lichterkette1";
-                break;
-            case R.id.button_lichterkette2:
-                deviceName = "Lichterkette2";
-                break;
             default:
                 break;
         }
@@ -347,12 +341,6 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
         devices.put(new Temperatur("Schlafzimmer"), new ArrayList<View>() {{
             add(findViewById(R.id.Schlafzimmer_Temp));
             add(findViewById(R.id.Schlafzimmer_Hum));
-        }});
-        devices.put(new Light("Lichterkette1"), new ArrayList<View>() {{
-            add(findViewById(R.id.button_lichterkette1));
-        }});
-        devices.put(new Light("Lichterkette2"), new ArrayList<View>() {{
-            add(findViewById(R.id.button_lichterkette2));
         }});
     }
 
