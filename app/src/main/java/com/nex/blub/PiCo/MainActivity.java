@@ -7,8 +7,8 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class MainActivity extends Activity implements PiCoActivity, SwipeRefreshLayout.OnRefreshListener, Notifiable {
+public class MainActivity extends Activity implements PiCoActivity,  Notifiable {
 
     private boolean isActivityInForeground = false;
 
@@ -93,14 +93,12 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
     /**
      * Wird aufgerufen, wenn in der View "nach unten" gezogen wird.
      */
-    @Override
+    /*@Override
     public void onRefresh() {
         deviceUpdater.update();
         swipeRefreshLayout.setRefreshing(false);
     }
-
-
-    /**
+/*
      * Methode wird beim Start der Activity ausgeführt
      * Übernimmt das Menu für die ActionBar
      *
@@ -372,8 +370,8 @@ public class MainActivity extends Activity implements PiCoActivity, SwipeRefresh
 
         this.initShortCuts();
 
-        swipeRefreshLayout = findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        //swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        ////////////////////swipeRefreshLayout.setOnRefreshListener(this);
     }
 
 }

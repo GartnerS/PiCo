@@ -1,8 +1,9 @@
-package com.nex.blub.PiCo;
+package com.nex.blub.PiCo.API;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.nex.blub.PiCo.DeviceUpdater;
 import com.nex.blub.PiCo.interfaces.HasHistoryData;
 
 import java.io.BufferedReader;
@@ -16,16 +17,16 @@ import java.net.URL;
 /**
  * API-Klasse, die HTTP-Requests an den Pimatic-Server sendet und das Ergebnis zurückliefern
  */
-public class API extends AsyncTask<String, Void, String>  {
+public abstract class API extends AsyncTask<String, Void, String>  {
 
     // Log-Tag für diese Klasse
-    private static final String TAG = "API";
+    private String TAG;
 
     // Die IP-Adresse des Pimatic-Servers
     private static final String SERVER_IP = "192.168.0.20";
 
     // Port für die API-Anfrage
-    private Integer Port = 80;
+    private Integer Port;
 
     // Wenn != null, dann wird nach einem Request die Methode "receiveResult(string)" des Objekts aufgerufen.
     private HasHistoryData callBackObj;
@@ -47,9 +48,9 @@ public class API extends AsyncTask<String, Void, String>  {
      * @param deviceUpdater Updater dessen Methode "receiveResult(string)"  nach einem Request
      *                      aufgerufen werden soll
      */
-    public API(DeviceUpdater deviceUpdater) {
-        this.deviceUpdater = deviceUpdater;
-    }
+//    public API(DeviceUpdater deviceUpdater) {
+//        this.deviceUpdater = deviceUpdater;
+//    }
 
 
     /**
@@ -68,6 +69,7 @@ public class API extends AsyncTask<String, Void, String>  {
     protected String doInBackground(String... urls) {
         try {
             String URL = "http://" + SERVER_IP + ":" + this.Port + "/" + urls[0];
+            Log.i(this.TAG, URL);
             return this.doRequest(URL);
         } catch (IOException e) {
             return "Unable to retrieve web page. URL may be invalid.";
@@ -130,15 +132,20 @@ public class API extends AsyncTask<String, Void, String>  {
     }
 
 
-    protected void onPostExecute(String result) {
-        // Falls ein Callback-Objekt registriert wurde
-        if (this.callBackObj != null) {
-            this.callBackObj.receiveHistoryResult(result);
-            return;
-        }
 
-        if (this.deviceUpdater != null) {
-            this.deviceUpdater.receiveResults(result);
-        }
+
+
+    protected void setPort(Integer port) {
+        this.Port = port;
+    }
+
+
+    protected Integer getPort(){
+        return  this.Port;
+    }
+
+
+    protected void setTag(String tag) {
+        this.TAG = tag;
     }
 }

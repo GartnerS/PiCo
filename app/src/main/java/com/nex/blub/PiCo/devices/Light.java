@@ -2,7 +2,8 @@ package com.nex.blub.PiCo.devices;
 
 import android.util.Log;
 
-import com.nex.blub.PiCo.API;
+import com.nex.blub.PiCo.API.API;
+import com.nex.blub.PiCo.API.PilightAPI;
 import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.utils.JSONUtils;
 
@@ -52,7 +53,7 @@ public class Light implements Device {
      * Lampe soll eingeschaltet werden => entsprechender API-Request wird gesendet
      */
     private void on() {
-        new API().execute("control?state=on&device=" + this.name);
+        PilightAPI.INSTANCE.execute("control?state=on&device=" + this.name);
     }
 
 
@@ -60,7 +61,7 @@ public class Light implements Device {
      * Lampe soll ausgeschaltet werden => entsprechender API-Request wird gesendet
      */
     private void off() {
-        new API().execute("control?state=off&device=" + this.name);
+        PilightAPI.INSTANCE.execute("control?state=off&device=" + this.name);
     }
 
 

@@ -3,6 +3,8 @@ package com.nex.blub.PiCo;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import com.nex.blub.PiCo.API.API;
+import com.nex.blub.PiCo.API.PilightAPI;
 import com.nex.blub.PiCo.interfaces.Notifiable;
 
 
@@ -23,7 +25,7 @@ public class DeviceUpdater {
 
 
     public void update() {
-        new API(this).execute("values");
+        new PilightAPI(this).execute("values");
     }
 
 

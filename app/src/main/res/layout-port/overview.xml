@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <!--<androidx.core.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -452,5 +452,5 @@
                 </TableRow>
             </TableLayout>
         </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <!--</androidx.core.widget.SwipeRefreshLayout>-->
 </LinearLayout>

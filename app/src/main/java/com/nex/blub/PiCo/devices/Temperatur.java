@@ -2,7 +2,8 @@ package com.nex.blub.PiCo.devices;
 
 import android.util.Log;
 
-import com.nex.blub.PiCo.API;
+import com.nex.blub.PiCo.API.API;
+import com.nex.blub.PiCo.API.HistoricAPI;
 import com.nex.blub.PiCo.interfaces.Device;
 import com.nex.blub.PiCo.interfaces.HasHistoryData;
 import com.nex.blub.PiCo.interfaces.ShowHistoryData;
@@ -112,7 +113,7 @@ public class Temperatur implements Device, HasHistoryData {
      * @param days Anzahl der Tage, für die die historischen Daten abgefragt werden sollen
      */
     public void getHistory(int days) {
-        new API(this, true).execute("?device=" + this.name + "&days=" + days);
+        new HistoricAPI(this).execute("?device=" + this.name + "&days=" + days);
     }
 
 
