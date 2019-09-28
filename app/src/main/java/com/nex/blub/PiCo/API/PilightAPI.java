@@ -7,9 +7,8 @@ public class PilightAPI extends API {
     //  Referenz, auf einen DeviceUpdater, der mit dem Ergebnis der API-Abfrage benachrichtig wird
     private DeviceUpdater deviceUpdater;
 
-    public final static PilightAPI INSTANCE = new PilightAPI();
 
-    private PilightAPI() {
+    public PilightAPI() {
         this.setPort(80);
         this.setTag("PilightAPI");
     }

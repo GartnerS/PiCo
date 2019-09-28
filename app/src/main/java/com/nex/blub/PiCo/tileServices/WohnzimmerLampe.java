@@ -2,6 +2,7 @@ package com.nex.blub.PiCo.tileServices;
 
 import android.graphics.drawable.Icon;
 import android.os.Build;
+import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import androidx.annotation.RequiresApi;
 import android.util.Log;
@@ -84,10 +85,13 @@ public class WohnzimmerLampe extends TileService implements Notifiable {
     private void updateTileIcon() {
         int iconId = (toggleState) ? R.drawable.light_on : R.drawable.light_off;
         Icon icon = Icon.createWithResource(getApplicationContext(), iconId);
+        getQsTile().setIcon(icon);
+
+        int tileState = (toggleState) ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
+        getQsTile().setState(tileState);
+
+        getQsTile().updateTile();
 
         toggleState = !toggleState;
-
-        getQsTile().setIcon(icon);
-        getQsTile().updateTile();
     }
 }

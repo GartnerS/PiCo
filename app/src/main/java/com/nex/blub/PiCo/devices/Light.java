@@ -53,7 +53,7 @@ public class Light implements Device {
      * Lampe soll eingeschaltet werden => entsprechender API-Request wird gesendet
      */
     private void on() {
-        PilightAPI.INSTANCE.execute("control?state=on&device=" + this.name);
+        new PilightAPI().execute("control?state=on&device=" + this.name);
     }
 
 
@@ -61,7 +61,7 @@ public class Light implements Device {
      * Lampe soll ausgeschaltet werden => entsprechender API-Request wird gesendet
      */
     private void off() {
-        PilightAPI.INSTANCE.execute("control?state=off&device=" + this.name);
+        new PilightAPI().execute("control?state=off&device=" + this.name);
     }
 
 

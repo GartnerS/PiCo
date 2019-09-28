@@ -10,7 +10,8 @@
         android:icon="@mipmap/icon_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/PiCoTest">
+        android:theme="@style/PiCoTest"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
